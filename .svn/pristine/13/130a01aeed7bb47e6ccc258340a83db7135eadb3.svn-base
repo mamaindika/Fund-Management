@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package service;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import model.TblUsercredentials;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+
+/**
+ *
+ * @author boc
+ */
+public class loginService {
+
+
+    public boolean authenticateUser(String userId, String password) {
+        TblUsercredentials user = getUserByUserId(userId);          
+        if(user!=null && user.getUserId().equals(userId) && user.getPassword().equals(password)){
+            return true;
+        }else{ 
+            return false;
+        }
+    }
+
+    public TblUsercredentials getUserByUserId(String userId) {
+         Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        TblUsercredentials user = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblUsercredentials where userId='"+userId+"'");
+            user = (TblUsercredentials)query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+    
+    
+}

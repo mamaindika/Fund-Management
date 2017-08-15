@@ -1,0 +1,55 @@
+<%-- 
+    Document   : editDesignation
+    Created on : May 5, 2016, 1:47:53 PM
+    Author     : Boc
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblDesignations" %>
+<!DOCTYPE html>
+<html>
+      <style>.custom {width: 50px !important;}</style>
+    <% TblDesignations acc = (TblDesignations) request.getAttribute("searchResult");
+   
+
+        if (acc != null) {
+
+    %>
+<style>.custom {width: 50px !important;}</style>
+    <form id="togglingForm" name="editDesignation" onsubmit="return validateform()"   class="form-horizontal" style="width:800px" method="post" action="designationUpdateController">
+<br> <br> <br> <br>
+        <!-- Form Name -->
+        <h4 style="text-align: left;"><b>Edit Designation</b></h4>
+        
+        <br> <br>
+        
+        <div class="form-group" hidden="true">
+            <label class="col-md-2 control-label"  style="text-align:left">ID</label> 
+                <div class="col-md-3">
+                    <input id="id" name="id" type="text" readonly="true" value="<% out.println(acc.getId()); %>"  class="form-control input-sm">
+                </div>
+         </div>
+                <div class="form-group">
+            <label class="col-md-2 control-label"  style="text-align:left">Description</label> 
+                <div class="col-md-3">
+                    <input id="description" name="description" value="<% out.println(acc.getDescription()); %>" type="text"  class="form-control input-sm" style="padding-left:10px">
+                </div>
+        </div>
+    
+             <div class="form-group">
+                        <div class="col-md-7">
+                        <div style="padding-left:40px;">
+                            <input class="btn btn-primary btn-xs custom" onclick="location.href='designationpage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; &nbsp;
+                               <input type="submit" class="btn btn-primary btn-xs custom" value="Update"/>
+    </div>
+                        </div>
+                        </div>
+          </form>
+  
+    <%  }else{  %>
+        Invalid Designation
+    <%  }  %>
+</html>
+
+

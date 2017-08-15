@@ -1,0 +1,153 @@
+<%-- 
+    Document   : role assign
+    Created on : Jun 17, 2016, 9:08:09 AM
+    Author     : boc
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblFunduserassign"%>
+<%@page import="model.TblFundtypes"%>
+<%@page import="service.FundTypesService"%>
+<%@page import="model.TblRoleassign"%>
+<%@page import="model.TblUser"%>
+<%@page import="service.UserService"%>
+<%@page import="model.TblUserroles"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.UserRolesService"%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Fund Management Application</title>
+        <style>.custom {width: 50px !important;}</style>
+    </head>
+    <body>
+        
+<form action="FundAssignController" method="post" id="add" name="add">
+
+<div class="row">
+
+        <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">fund</label> 
+                            <div class="col-md-3">
+                <select class="form-control input-sm" id="selectFilter" name="fund">
+                    <option>select</option>
+                    <%
+                    FundTypesService fundSer = new FundTypesService();
+                    List fund = fundSer.listFundTypes();
+                  
+                  for (Iterator iterator = fund.iterator(); iterator.hasNext();) {
+                     TblFundtypes tblFundtypes = (TblFundtypes) iterator.next();
+                     request.setAttribute("fund",tblFundtypes);
+                     System.out.println("test66"+tblFundtypes.getId());
+                    %>
+                    <option value=<%=tblFundtypes.getId()%>><%= tblFundtypes.getDescription()%></option> 
+                    <% System.out.println("test88"+tblFundtypes.getId());%>
+                <%  }  %>
+                </select>
+                
+                </div>
+                
+     <script>
+$('#selectFilter').change(function(){
+    var trs = $('#fund tr');
+ 
+    if(this.value ===''){
+         trs.show(); 
+       
+    }else{
+       var $el = $('.'+this.value);
+       trs.not($el).hide();
+     
+       $el.show();       
+    }
+});
+</script>           
+                
+        </div>
+       
+            <br><br>         
+    <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">User</label> 
+                            <div class="col-md-3">
+              <select class="form-control input-sm" id="pfno" name="pfno">
+                    <option>select</option>
+                <%
+                    UserService userSer = new UserService();
+                    List users = userSer.ActivelistUsers();
+                for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                    TblUser tbluser = (TblUser) iterator.next();
+                    request.setAttribute("pfno",tbluser);
+                    System.out.println("test66"+tbluser.getPfNo());
+                %>
+                    <option value=<%=tbluser.getPfNo()%>><%= tbluser.getUserName()%></option> 
+                <% System.out.println("test88"+tbluser.getPfNo());%>
+            <%  }  %>
+                </select> 
+                </div>
+        </div>
+<br><br>
+<div class="form-group">
+     <div class="col-md-8">
+        <button id="add" name="add" action="name" type="submit" class="btn btn btn-primary btn-sm  move-right btn-primary">
+       Assign
+        </button>
+     </div>
+</div>
+     
+        </div>
+          </form>
+          <div class="row">
+              <br><br><br><br>
+          </div>
+        <div class="row" align="center">
+             
+        
+        <table class="table table-bordered" style="width:60%; align-content: center"> 
+            <thead style="text-align:left">
+                <tr>
+                   <th>PF No</th> 
+                   <th>Fund Type</th>
+                   <th></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left" id="fund">
+               <%
+                    FundTypesService as = new FundTypesService ();
+                    List users1 = as.listassignFunds();
+                    for (Iterator iterator = users1.iterator(); iterator.hasNext();) {
+                        TblFunduserassign us = (TblFunduserassign) iterator.next();
+                %>
+                <tr class="<%= us.getTblFundtypes().getId()%>">
+                   <td style="width: 40%"><%= us.getTblUser().getPfNo()%></td>
+                   <td style="width: 40%"><%= us.getTblFundtypes().getDescription()%></td>
+                   
+                   <td style="width: 20%; text-align: center">
+                    <form name="editForm" action="FundAssignEditController" method="post">
+                        <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-xs custom" />
+                        <input type="hidden" value="<%=us.getTblUser().getPfNo()%>" name="searchValue" />             
+                        <input type="hidden" value="<%=us.getTblFundtypes().getId()%>" name="searchValue1" />
+                        <input type="hidden" value="<%=us.getId() %>" name="searchValue2" />  
+
+                    </form>  
+                    </td>
+ 
+                    
+                    
+                <%  }  %>
+          
+                
+                
+                </tr>
+            </tbody>
+        </table>
+                     </div>
+                
+                    
+            
+                      
+
+                
+    </body>
+</html>

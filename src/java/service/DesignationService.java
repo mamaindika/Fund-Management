@@ -1,0 +1,175 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package service;
+
+import model.TblDesignations;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+import java.util.Iterator;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+
+/**
+ *
+ * @author boc
+ */
+public class DesignationService {
+
+    public String addDesignation(TblDesignations acc) {
+        String message = null;
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tr = s.getTransaction();
+            tr.begin();
+            s.save(acc);
+            tr.commit();
+            message = "Saved Data";
+            return message;
+        } catch (Exception e) {
+            return (e.getMessage());
+        } finally {
+            s.close();
+        }
+
+    }
+
+    
+    
+        public TblDesignations searchDesignationsDe(String description) {
+        String message = null;
+        Session session = null;
+        Transaction tx = null;
+        TblDesignations user = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblDesignations where description='" + description + "'");
+            user = (TblDesignations) query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+    
+    
+    
+    
+    public TblDesignations searchDesignations(String id) {
+        String message = null;
+        Session session = null;
+        Transaction tx = null;
+        TblDesignations user = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblDesignations where id='" + id + "'");
+            user = (TblDesignations) query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+    
+        public TblDesignations searchDesignationsID(int id) {
+        String message = null;
+        Session session = null;
+        Transaction tx = null;
+        TblDesignations user = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblDesignations where id='" + id + "'");
+            user = (TblDesignations) query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+
+    public String updateDesignation(TblDesignations acc) {
+        String message = null;
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tr = s.getTransaction();
+            tr.begin();
+            System.out.println(acc.getId());
+            s.update(acc);
+            tr.commit();
+            message = "Saved Data";
+            return message;
+        } catch (Exception e) {
+            return (e.getMessage());
+        } finally {
+            s.close();
+        }
+
+    }
+    
+      public String deleteDesignation(TblDesignations acc) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tr = s.getTransaction();
+            tr.begin();
+            s.delete(acc);
+            tr.commit();
+            return "Deleted Designation";
+        } catch (Exception e) {
+            return (e.getMessage());
+        } finally {
+            s.close();
+        }
+
+    }
+
+      
+      public List listDesignations() {
+        List listDesig = null;
+        Session s = null;
+        try {
+            s =HibernateUtil.getSessionFactory().openSession();
+            listDesig = s.createCriteria(TblDesignations.class).list();   //returns all matching rows. 
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } 
+
+        return listDesig;
+
+}
+      
+   
+      
+      
+      
+      
+}

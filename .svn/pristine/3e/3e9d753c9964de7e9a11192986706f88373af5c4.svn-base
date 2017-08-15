@@ -1,0 +1,186 @@
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.masterAccountsService"%>
+<%@page import="service.MasterJournalsService"%>
+<%@page import="model.TblAccountJournalmapping" %>
+<%@page import="model.TblMasteraccounts"%>
+<%@page import="model.TblMasterjournals"%>
+<html>
+<style>.custom { width: 60px !important;}</style>
+<br><br><br><br>
+<div class="row">
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Name</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="selectFilter" name="JournalName" >  
+        <option>select</option>
+            <%
+                MasterJournalsService ms = new MasterJournalsService();
+                List listjournals= ms.listMasterjournals();
+                for (Iterator iterator = listjournals.iterator(); iterator.hasNext();) {
+                      TblMasterjournals as = (TblMasterjournals) iterator.next();
+                      request.setAttribute("JournalName",as);
+            %>
+        <option value=<%=as.getId()%>><%= as.getJournalName()%></option> 
+
+            <%  }  %>
+</select>
+<script>
+$('#selectFilter').change(function(){
+    var trs = $('#Journal tr');
+    if(this.value ===''){
+         trs.show(); 
+    }else{
+       var $el = $('.'+this.value);
+       trs.not($el).hide();
+       $el.show();       
+    }
+});
+</script>
+</div>
+</div>
+<br><br> 
+    <table class="table table-bordered">
+    <thead>        
+        <th>Journal Name</th>
+        <th>Account Name</th>
+        <th>Account No</th>
+        <th>Process</th>
+        <th></th>
+    </thead>
+    <tbody style="text-align:left" id="Journal" onchange="this.form.submit()">
+                <%
+                    MasterJournalsService as = new MasterJournalsService();
+                    List users = as.listMappedAccountJournalmapping();
+                    for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                        TblAccountJournalmapping us = (TblAccountJournalmapping) iterator.next();
+                %>
+    <tr class="<%= us.getTblMasterjournals().getJournalName()%>">
+        <td><%= us.getTblMasterjournals().getJournalName()%></td>
+        <td><%= us.getTblMasteraccounts().getAccountName()%></td>
+        <td style="text-align:right"><%= us.getTblMasteraccounts().getAccountNo()%></td>
+        <td><%= us.getProcess()%></td>
+                   
+            <td style="text-align: center">
+                    <form name="editForm" action="Account_JournalEditController" method="post">
+                    <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-xs custom" />
+               <input type="hidden" value="<%=us.getId()%>" name="searchValue" />
+                    <input type="hidden" value="<%=us.getTblMasteraccounts().getAccountNo()%>" name="searchValue1" />             
+                    <input type="hidden" value="<%=us.getTblMasterjournals().getId()%>" name="searchValue2" />
+               
+                        
+                        <a href="Account_Journal_DeletePage.jsp?id=<%=us.getId()%>" class="btn btn-primary btn-xs custom">Delete</a>
+                       
+                    </form>  
+                    </td>            
+                <%  }  %>
+          
+    </tr>
+    </tbody>
+    </table>
+    <div class="form-group">
+    <div class="col-md-9">
+    <br>
+    <input type="button" class="btn btn-xs custom btn-primary" data-toggle="modal" value="Add" data-target="#myModal">
+    &nbsp;
+    <input type="submit"  name="action"  id="Confirm" value="Confirm" class="btn btn-xs custom btn-primary">
+    </div>
+    </div>
+</div>
+<div>             
+
+<div id="myModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-body">
+<form action="Account_JournalMappingController" method="post" class="form-horizontal">
+    <div class="form-group">
+    <label class="col-md-4 control-label"  style="text-align:left">Journal Name</label>
+    <div class="col-md-5">
+    <select class="form-control input-sm" id="JournalName" name="JournalName">  
+                                        <option>select</option>
+                                        <%
+                                            MasterJournalsService ms1 = new MasterJournalsService();
+                                            List listjournals1= ms1.listMasterjournals();
+                                            for (Iterator iterator = listjournals1.iterator(); iterator.hasNext();) {
+                                                  TblMasterjournals as1 = (TblMasterjournals) iterator.next();
+                                                  request.setAttribute("JournalName",as1);
+                                        %>
+                                        <option value=<%=as1.getId()%>><%= as1.getJournalName()%></option> 
+
+                                         <%  }  %>
+    </select>
+    </div>
+    </div>
+    <div class="form-group">
+    <label class="col-md-4 control-label"  style="text-align:left">Process</label>
+    <div class="col-md-5">
+    <select class="form-control input-sm" id="Process" name="Process">
+        <option>Credit</option>
+        <option>Debit</option>
+    </select>
+    </div>
+    </div>  
+
+    <div class="form-group">
+    <label class="col-md-4 control-label" for="sel1" style="text-align:left">Account Name</label>
+    <div class="col-md-5">
+    <select class="form-control input-sm" id="AccountName" name="AccountName" >  
+                                        <option>select</option>
+                                        <%
+                                            masterAccountsService ds = new masterAccountsService();
+                                            List listDesig = ds.listMasterAccounts();
+                                            for (Iterator iterator = listDesig.iterator(); iterator.hasNext();) {
+                                                  TblMasteraccounts ass = (TblMasteraccounts) iterator.next();
+                                                  request.setAttribute("AccountName",ass);
+                                        %>
+                                        <option value=<%=ass.getAccountNo()%>><%= ass.getAccountName()%></option> 
+
+                                         <%  }  %>
+    </select>
+
+    <!-- Text input-->
+    </div>
+    </div>
+<script>                  
+$(document).ready(function() { 
+    $('#AccountName').change(function() {
+      $('#AccountNo').val($('#AccountName').val());
+    });
+});
+</script>
+    <div class="form-group">
+    <label class="col-md-4 control-label"  style="text-align:left">Account No</label> 
+    <div class="col-md-5">
+    <input id="AccountNo" name="AccountNo" value="" type="text" placeholder="" class="form-control input-sm" required="" style="padding-left:10px">
+    </div>
+    </div> 
+    <div class="form-group">
+    <label class="col-md-4 control-label"  style="text-align:left">Status</label>
+    <div class="col-md-5">
+    
+        <select class="form-control input-sm" id="status" name="status" readonly="true">  
+          <option>Pending</option>
+        </select>
+    </div>
+    </div>
+
+    <div class="form-group">
+    <div class="col-md-12">
+    <div>
+    <input type="submit" class="btn btn-primary btn-xs custom" value="Save">
+    </div>
+    </div>
+    </div>
+
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</html>

@@ -1,0 +1,84 @@
+<%-- 
+    Document   : journalEdit
+    Created on : Jun 16, 2016, 9:36:01 AM
+    Author     : boc
+--%>
+<%@page import="model.TblMasterjournals" %>
+<%@page import="service.MasterJournalsService" %>
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+       <% TblMasterjournals acc = (TblMasterjournals) request.getAttribute("searchResult");
+   
+
+        if (acc != null) {
+
+    %>
+<div id="myform">
+<form action="MasterJournalsUpdateController" method="post" class="form-horizontal">
+<h4 style="text-align: left;"><b>Account Journals</b></h4> 
+<!-- Form Name -->
+<div class="panel panel- active">
+<div class="panel-heading" style="text-align: left; background-color:#ADD8E6"><b>Master Journal Details<b></div>
+
+<div class="panel-body"> 
+<div class="form-group" hidden="true">
+<label class="col-md-3 control-label"  style="text-align:left">Journal id</label>
+<div class="col-md-3"> 
+    <input class="form-control input-sm" id="id" name="id" value="<% out.println(acc.getId());%>">
+</div>
+</div> 
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Name</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalName" name="journalName" value="<% out.println(acc.getJournalName());%>" >
+</div>
+</div>             
+            
+            
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Description</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalDescription" name="journalDescription" value="<% out.println(acc.getJournalDescription());%>" >
+</div>
+</div>            
+ <!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Type Of Journal</label>
+<div class="col-md-3">
+    <select class="form-control input-sm" id="typeOfJournal" name="typeOfJournal" value="<% out.println(acc.getTypeOfJournal());%>" >
+    <option><% out.println(acc.getTypeOfJournal());%></option>
+    <option>Investment</option>
+    <option>Contribution</option>
+    <option>Payments</option>
+    <option>Shares</option>
+
+  </select>
+</div>
+</div>           
+
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Status</label>
+<div class="col-md-3">
+    <input class="form-control input-sm" id="status" name="status" value="Active" >
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-11">
+<div>
+    <input type="button" class="btn btn-sm btn-primary" onclick="location.href='MasterJournals.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+    <input type="submit" class="btn btn-sm btn-primary" value="Save">
+</div>
+</div>
+</div>
+ </div>
+</div>
+</form>
+
+</div>
+
+<%  }else{  %>
+       
+    <%  }  %>

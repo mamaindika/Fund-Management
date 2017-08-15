@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+<div class="panel-heading" style="background: #ADD8E6">
+<h3 class="panel-title" style="text-align:left">
+<b>Designation</b>
+</h3>
+</div>
+<div class="panel-body" style="background:#c1e1ec">
+<form class="form-horizontal">
+<fieldset>
+<div class="form-group">
+<label class="col-md-4 control-label" for="Designation ID" style="text-align:left">Designation ID</label>
+<div class="col-lg-6"> 
+<input class="form-control input-sm" id="Profile Description" name="Designation ID">
+</div>
+</div>
+<div class="form-group">
+<label class="col-md-4 control-label" for="Designation Description" style="text-align:left">Profile Description</label>
+<div class="col-lg-6"> 
+<textarea class="form-control input-sm" id="Profile Description" name="Designation Description"></textarea>
+</div>
+</div>
+
+
+<!-- Button -->
+<div class="btn-group pull-right">
+<label class="col-md-4 control-label" for="Save"></label>
+<div class="col-md-4">
+<button id="Save" name="Save" class="btn btn-primary">Save</button>
+</div>
+</div>
+
+</fieldset>
+</form>
+</div>
+
+</div>
+

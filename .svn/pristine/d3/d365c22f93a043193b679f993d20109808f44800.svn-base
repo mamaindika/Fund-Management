@@ -1,0 +1,227 @@
+create database test;
+
+use test;
+
+create table tbl_designations(
+id int primary key auto_increment,
+description varchar(150)
+);
+
+create table tbl_fundTypes(
+id int primary key auto_increment,
+description varchar(150)
+);
+
+create table tbl_UserRoles(
+id int primary key auto_increment,
+description varchar(150)
+);
+create table tbl_InvestmentTypes(
+id int primary key auto_increment,
+description varchar(150)
+);
+
+create table tbl_user(
+pfNo int primary key,
+Salutations varchar(100),
+firstName varchar(100), 
+lastName varchar(100),
+userName  varchar(100) unique,
+designationId int,
+status varchar(100),
+gender varchar(100),
+officeNo varchar(100),
+mobileNo varchar(100), 
+email varchar(100),
+FOREIGN KEY(designationId) REFERENCES tbl_designations(id)
+);
+
+create table tbl_userCredentials(
+userId varchar(100) primary key, 
+pfNo  int,
+password varchar(100),
+loginStatus int,
+firstLogin int,
+foreign key(pfNo ) references tbl_user(pfNo) 
+);
+
+
+create table tbl_FundUserAssign(
+id int primary key auto_increment,
+fundId int,
+pfNo  int,
+status int,
+foreign key (fundId) references tbl_fundtypes(id),
+foreign key(pfNo ) references tbl_user(pfNo) 
+);
+
+create table tbl_RoleAssign(
+id int primary key auto_increment,
+roleId int,
+pfNo int unique,
+status int,
+foreign key (roleId) references tbl_UserRoles(id),
+foreign key(pfNo) references tbl_user(pfNo)
+);
+
+
+
+create table tbl_MasterAccounts(
+accountNo int primary key,
+accountName varchar(100),
+currentLedger varchar(100),
+typeOfAccount varchar(100),
+status varchar(100),
+fundId int,
+foreign key (fundId) references tbl_fundTypes(id)
+);
+
+create table tbl_MasterJournals(
+id int primary key auto_increment,
+journalNo int(100) unique,
+journalName varchar(100),
+journalDescription varchar(100),
+typeOfJournal varchar(100),
+status varchar(100),
+fundId int,
+foreign key (fundId) references tbl_fundTypes(id)
+);
+
+create table tbl_Account_JournalMapping(
+id int primary key auto_increment,
+journalId int,
+accountNo int,
+process varchar(100),
+status	varchar(100),
+foreign key (journalId) references tbl_MasterJournals(id),
+foreign key(accountNo) references tbl_MasterAccounts(accountNo )
+);
+
+
+
+
+create table tbl_transactionType(
+TransactionTypeId int primary key auto_increment,
+TransactionDescription varchar(100)
+);
+
+Insert into tbl_transactionType(TransactionDescription) values('contributions');
+Insert into tbl_transactionType(TransactionDescription) values('Payments');
+
+
+
+create table tbl_transactionsdetails(
+Id int primary key auto_increment,
+journalNo int,
+TransactionTypeId int,
+createdDate varchar(75),
+createdUser varchar(75),
+TransactionDate varchar(75),
+TransactionAmount decimal(13,2),
+TransactionDescription varchar(100),        
+status varchar(75),
+authorizedUser varchar(75),
+authorizedDate varchar(75),
+Comments varchar(100),
+fundId int,
+foreign key (fundId) references tbl_fundTypes(id),
+FOREIGN KEY(TransactionTypeId) REFERENCES tbl_transactionType(TransactionTypeId),
+FOREIGN KEY(journalNo) REFERENCES tbl_MasterJournals(id)
+);
+
+
+
+create table tbl_Investments(
+id int primary key auto_increment,
+InvestmentTypeId int,
+referenceNo int,
+ReceiptNo int,
+journalNo int,
+InvestDate varchar(100),
+MatureDate varchar(100),
+NoOfDays int,
+Amount decimal(13,2),
+TaxRate int,
+TaxValue  varchar(100),
+InterestRate int,
+InterestValue  varchar(100),
+InterestAt int,
+fundId int,
+interest decimal(10,2),
+foreign key (fundId) references tbl_fundTypes(id),
+foreign key (InvestmentTypeId) references tbl_InvestmentTypes(id),
+FOREIGN KEY(journalNo) REFERENCES tbl_MasterJournals(id)
+);
+
+
+////////
+
+
+
+drop table tbl_Account_JournalMapping;
+
+drop table tbl_transactionsdetails;
+drop table tbl_investments;
+drop table tbl_MasterJournals;
+
+
+drop table tbl_MasterAccounts;
+drop table tbl_designations;
+
+drop table tbl_userCredentials;
+drop table tbl_fundTypes;
+drop table tbl_UserRoles;
+drop table tbl_FundAssign;
+
+drop table tbl_RoleAssign;
+drop table tbl_InvestmentTypes;
+
+drop table tbl_Contributions;
+
+
+drop table tbl_designations;
+drop table tbl_user;
+
+drop table tbl_transactionType;
+drop table tbl_transactionsdetails;
+
+
+
+Tables_in_test
+---------------------------
+tbl_account_journalmapping
+tbl_designations
+tbl_fundtypes
+tbl_funduserassign
+tbl_investments
+tbl_investmenttypes
+tbl_masteraccounts
+tbl_masterjournals
+tbl_roleassign
+tbl_transactionsdetails
+tbl_transactiontype
+tbl_user
+tbl_usercredentials
+tbl_userroles
+
+
+
+...........
+<!--desc tbl_contributions; 
+desc tbl_masterjournals;
+ desc   tbl_payments;
+desc  tbl_masteraccounts  ;
+
+desc  tbl_roleassign;
+desc  tbl_transactiontype;
+desc  tbl_user;
+desc  tbl_userroles;
+desc tbl_funduserassign;
+desc  tbl_transactionsdetails ;
+
+desc  tbl_usercredentials;-->
+
+desc tbl_account_journalmapping;
+desc  designations;
+desc  tbl_fundtypes;
+desc tbl_funduserassign;

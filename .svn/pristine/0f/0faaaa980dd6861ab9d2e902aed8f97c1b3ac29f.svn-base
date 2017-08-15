@@ -1,0 +1,149 @@
+<%@page import="service.UserRolesService"%>
+<%@page import="model.TblFundtypes"%>
+<%@page import="service.FundTypesService"%>
+<%@page import="model.TblUser"%>
+<%@page import="model.TblUserroles"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="service.UserService"%>
+<%@page import="java.util.List"%>
+<div class="span3">
+     <div class="well" style="background-color:#ADD8E6" margin="0px">
+        <div>  
+        <ul class="nav nav-list">
+        <% 
+                if((session.getAttribute("loggedUserId")!=null)&&(session.getAttribute("loggedRoleId")!=null)){ 
+//session.getAttribute("loggedRoleId")
+                    int userId= (Integer)session.getAttribute("loggedUserId"); 
+                //int fundId= (Integer)session.getAttribute("loggedFundType"); 
+int roleId= (Integer)session.getAttribute("loggedRoleId"); 
+                    UserService  userSer = new UserService();
+                    //FundTypesService fundSer = new FundTypesService();
+UserRolesService roleSer= new UserRolesService();
+                    TblUser logUser = userSer.getUserByuserId(userId);
+                   // TblFundtypes logFund=fundSer.getFundByfundId(fundId);
+TblUserroles logRole=roleSer.getRolebyId(roleId);
+                     
+                %>
+<%if (roleId==3) {%> 
+ <li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Account Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="MasterAccounts_ManagePage.jsp">Master Accounts</a></li>
+                          <li style="text-align: left; padding-left:5px"><a href="MasterJournals_ManagePage.jsp">Master Journals</a></li>
+                          
+                        <li style="text-align: left; padding-left:5px"><a href="test.jsp">Account-Fund Type Assignment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="Account_Journal_ManagePage.jsp">Account Journal Mapping</a></li> 
+                    </ul>
+                </li>
+
+ <li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Cash Flow</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="TransactionManagePage.jsp">Transactions</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="Transaction_AuthorizationPage.jsp">Authorization</a></li>
+                    </ul>
+                </li>
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Investment Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="openinvestment.jsp">Open Investment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="CloseInvestmentManagePage.jsp">Close Investment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="ManageInvestmentAuthorizationPage.jsp">View Investment</a></li>
+                    </ul>
+                </li>
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Reports</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="test.jsp">Balance sheet</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="test.jsp">Maturity Investments</a></li>
+                        <!--  <li style="text-align: left; padding-left:5px"><a href="#"></a></li> -->
+                    </ul>
+                </li>  
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Profile</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+         
+              <li style="text-align: left; padding-left:5px"><a href="changepassword.jsp">Password Change</a></li>
+                          <%--
+                if(session.getAttribute("loggedUserId")!=null){ 
+                int userId=(Integer)session.getAttribute("loggedUserId"); 
+                    UserService  userSer = new UserService();
+                    TblUser logUser = userSer.getUserByuserId(userId);
+
+                    System.out.println(logUser.getLastName()+","+logUser.getMobileNo());
+        
+                          --%>
+              <li style="text-align: left; padding-left:5px">
+                        <form action="UserModifyController" method="post">
+                        <input type="submit" value="Modify Data" name="editButton" class="btn btn-link" />
+                        <input type="hidden" value="<%= logUser.getTblDesignations().getId()%>" name="searchValue1" />             
+                        <input type="hidden" value="<%=logUser.getUserName()%>" name="searchValue" />
+                        </form> 
+              </li>
+                        <%-- }  --%>  
+                            
+                        <!--  <li style="text-align: left; padding-left:5px"><a href="#"></a></li> -->
+                    </ul>
+                </li> 
+
+<%}%>
+
+
+<%if (roleId==2) {%>
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Set Up</label>
+    <ul class="nav nav-list tree" style="font-size:small">  
+<li style="text-align: left; padding-left:5px"><a href="Designation_ManagePage.jsp">Designation</a></li>
+<li style="text-align: left; padding-left:5px"><a href="UserRole_ManagePage.jsp">User Roles</a></li>                     
+<li style="text-align: left; padding-left:5px"><a href="FundType_ManagePage.jsp">Fund Types</a></li>
+<li style="text-align: left; padding-left:5px"><a href="InvestmentTypesManagePage.jsp">Investment Types</a></li>                              
+    </ul>
+                </li>
+                <!-- <li class="divider"></li> -->
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">User Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="User_ManagePage.jsp">User Accounts</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="test.jsp">User Role Rights</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="RoleAssignPage.jsp">User Role Assignment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="FundAssign_ManagePage.jsp">User Fund Type Permission</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="test.jsp">User Role Report Permission </a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="test.jsp">User Password Reset</a></li>
+                    </ul>
+                </li>
+
+
+              
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Profile</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+         
+              <li style="text-align: left; padding-left:5px"><a href="changepassword.jsp">Password Change</a></li>
+                          <%--
+                if(session.getAttribute("loggedUserId")!=null){ 
+                int userId=(Integer)session.getAttribute("loggedUserId"); 
+                    UserService  userSer = new UserService();
+                    TblUser logUser = userSer.getUserByuserId(userId);
+
+                    System.out.println(logUser.getLastName()+","+logUser.getMobileNo());
+        
+                          --%>
+              <li style="text-align: left; padding-left:5px">
+                        <form action="UserModifyController" method="post">
+                         <input type="submit" value="Modify Data" name="editButton" class="btn btn-link" />
+                        <input type="hidden" value="<%= logUser.getTblDesignations().getId()%>" name="searchValue1" />             
+                        <input type="hidden" value="<%=logUser.getUserName()%>" name="searchValue" />
+                        </form> 
+                        <%-- }  --%>  
+                            
+              </li>       <!--  <li style="text-align: left; padding-left:5px"><a href="#"></a></li> -->
+                    </ul>
+                </li> 
+                <% } %>
+                
+                      <% } %> 
+            </ul>
+        </div>
+    </div>
+    </div>
+<script>
+$('.tree-toggle').click(function () {
+	$(this).parent().children('ul.tree').toggle(200);
+});
+</script>
+
+
+
+

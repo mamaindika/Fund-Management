@@ -1,0 +1,128 @@
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Fund Management Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script type="text/javascript" src="jquery/jquery-1.10.2.min.js"></script>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+
+  <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/datepicker.css">
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+</head>
+<body>
+<header> 
+<%@ include file="divIncludes/head.jsp" %>
+    </header> 
+  <!--end of header bar-->
+<div class="container-fluid text-center" style="background-color:#F0FFFF">  
+  <div class="row content">
+		<div class="col-md-2 sidenav" style="">
+            <%@ include file="divIncludes/navi.jsp" %>
+
+		</div>
+ <div class="col-md-10" style="padding-left:20px; padding-right:20px">
+                   <div class="row">
+<div class="col-md-12">
+<!-- Form Name -->
+<legend style="text-align:left">Authorize Investment</legend>
+<div class="form-group">
+<label class="col-md-2 control-label" for="sel1" style="text-align:left">Investment Type</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="Investment Type">
+     <option>select</option>
+    <option>Fixed Deposit</option>
+    <option>Debenture</option>
+    <option>Treasury Bond</option>
+    <option>Treasury Bill</option>
+    <option>Re-Purchase Agreement</option>
+    <option>Government Bond</option>
+    <option>Shares</option>
+
+  </select>
+</div>
+</div>
+</div></div>
+ <br><br>                
+<div class="row">
+<div class="col-md-2">
+<div class="form-group">
+
+
+<label class="control-label" for="no">
+ No
+</label>
+<input type="no" class="form-control input-sm" id="no" />
+</div>
+</div>
+
+<div class="col-md-2">
+<div class="form-group">
+<label class="control-label" for="referenceNo">
+Reference No 
+</label>
+<input type="referenceNo" class="form-control input-sm" id="referenceNo" />
+</div> </div>
+
+<div class="col-md-2">
+<div class="form-group" id="sandbox-container">
+<label class="control-label" for="Date">
+Date
+</label>
+<div class="input-group date">
+  <input type="text" class="form-control input-sm"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div>
+</div>
+    <script>
+        $('#sandbox-container .input-group.date').datepicker({
+    todayBtn: "linked",
+    toggleActive: true
+});
+</script>
+</div>
+   
+<div class="col-md-2">
+<br /> 
+
+<a href="#" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-search"></span> Search</a>
+</div>
+<div class="col-md-2">
+
+
+</div>
+</div>                   
+                    
+<div class="row">
+    <br><br>
+<div class="col-md-2">
+    <legend style="text-align:left; font-size:14px;" >List of Investments</legend>   
+</div>
+<div class="col-md-10">
+
+    
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- start footer here--> 
+
+<div id="footer" style="background-color: navy">
+  <%@ include file="divIncludes/footer.jsp" %>
+  
+</div>
+</body>
+</html>
+

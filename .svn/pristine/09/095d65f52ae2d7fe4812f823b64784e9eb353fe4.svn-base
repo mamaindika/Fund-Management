@@ -1,0 +1,142 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblUser" %>
+<%@page import="model.TblDesignations" %>
+<%@page import="service.UserService" %>
+<%@page import="service.DesignationService" %>
+<!DOCTYPE html>
+<html>
+    <% TblUser acc = (TblUser) request.getAttribute("searchResult");
+       TblDesignations ac = (TblDesignations) request.getAttribute("searchResult1");
+            if ((acc != null)&&(ac != null)) {
+    %>
+
+    <form id="togglingForm"  class="form-horizontal" method="post" action="userUpdateController">
+
+        <!-- Form Name -->
+        <h4 style="text-align: left;"><b>Edit User</b></h4>
+        <div class="form-group">
+            <label class="col-md-2 control-label"  style="text-align:left">PF No</label> 
+                <div class="col-md-3">
+                    <input id="pfNo" name="pfNo" type="text" value="<% out.println(acc.getPfNo()); %>" readonly="true" class="form-control input-sm" required="">
+                </div>
+        </div>
+                
+           <div class="form-group">
+            <label class="col-md-2 control-label"  style="text-align:left">User Name</label> 
+                <div class="col-md-3">
+                    <input id="userName" name="userName" value="<% out.println(acc.getUserName()); %>" type="text" readonly="true" class="form-control input-sm" required="" style="padding-left:10px">
+                </div>
+        </div>       
+         
+          <div class="form-group">
+                            <label class="col-md-2 control-label"  style="text-align:left">Salutations</label>
+                            <div class="col-md-3">
+                                <select class="form-control input-sm" value="<% out.println(acc.getSalutations()); %>" id="salutations" name="salutations">
+                                    <option>Miss</option>
+                                    <option>Ms</option>
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                </select>
+
+                            </div>
+                        </div>        
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="User Name"  style="text-align:left">First Name</label> 
+                <div class="col-md-3">
+                    <input id="firstName" name="firstName" value="<% out.println(acc.getFirstName()); %>" type="text"  class="form-control input-sm" required="" style="padding-left:10px">
+                </div>
+        </div>
+                        <div class="form-group">
+            <label class="col-md-2 control-label"  style="text-align:left">Last Name</label> 
+                <div class="col-md-3">
+                    <input id="lastName" name="lastName" value="<% out.println(acc.getLastName()); %>" type="text"  class="form-control input-sm" required="" style="padding-left:10px">
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label"  style="text-align:left">Gender</label>
+            <div class="col-md-3">
+            <select class="form-control input-sm"  value=" <% out.println(acc.getGender()); %>" id="gender" name="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+            </select>
+            </div>
+        </div>
+        <!-- Text input-->
+     <div class="form-group">
+                            <label class="col-md-2 control-label"  style="text-align:left">Designation</label>
+                            <div class="col-md-3">
+                                <select class="form-control input-sm" id="designation" name="designation" >  
+                                    <option value=<%=ac.getId() %>><% out.println(ac.getDescription()); %></option>
+                                    <%
+                                        DesignationService ds = new DesignationService();
+                                        List listDesig = ds.listDesignations();  
+                                        for (Iterator iterator = listDesig.iterator(); iterator.hasNext();) {
+                                              TblDesignations as = (TblDesignations) iterator.next();  
+                                    %>
+                                        <option value=<%=as.getId() %>><%= as.getDescription()%></option> 
+                                     <%  }  %>
+                                </select>
+
+                            </div>
+                        </div> 
+         
+            
+                
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="status" style="text-align:left">status</label> 
+            <div class="col-md-3">
+            <select class="form-control input-sm" id="status" readonly="true"  value=" <% out.println(acc.getStatus()); %>" name="status">
+    <option>Active</option>
+    <option>Deceased</option>
+    <option>In-Active </option>
+</select>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Office No" style="text-align:left">Office No</label> 
+            <div class="col-md-3">
+                <input id="officeNo" name="officeNo" value="<% out.println(acc.getOfficeNo()); %>" type="text" placeholder="Office No" class="form-control input-sm" required="">
+            </div>
+        </div>
+                
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Mobile No" style="text-align:left">Mobile No</label> 
+            <div class="col-md-3">
+                <input id="mobileNo" name="mobileNo" type="text" value="<% out.println(acc.getMobileNo()); %>" placeholder="Mobile No" class="form-control input-sm" required="">
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="inputEmail" style="text-align:left">Email</label> 
+            <div class="col-md-3">
+                <input id="email" name="email" type="email" placeholder="email" value="<% out.println(acc.getEmail()); %>" class="form-control input-sm" required="">
+            </div>
+        </div>
+            
+             <div class="form-group">
+                        <div class="col-md-5">
+                        <div style="padding-left:200px;">
+                            <a href="manageuserpage.jsp"  class="btn btn-sm btn-primary">Back</a>
+                             &nbsp;&nbsp;
+                               <input type="submit" class="btn btn-sm btn-primary" value="Update"/>
+    </div>
+                        </div>
+                        </div>
+          </form>
+
+    <%  }else{  %>
+        Invalid PF Number
+    <%  }  %>
+</html>
+
+
+
+

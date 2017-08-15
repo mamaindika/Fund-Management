@@ -1,0 +1,44 @@
+<style>.custom {width: 50px !important;}</style>
+<div class="panel panel-default">
+<div class="panel-heading" style="background:#ADD8E6">
+    <h3 class="panel-title" style="text-align:left">
+        <b>Change Password</b>
+</h3>
+</div>
+    <div class="panel-body" style="background:#99ccff">
+<form class="form-horizontal">
+<fieldset>
+<!-- Password input-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="Current Password" style="text-align:left">Current Password</label>
+<div class="col-lg-5">
+<input id="Current Password" name="Current Password" type="password" placeholder="" class="form-control input-sm" required="">
+
+</div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="passwordinput" style="text-align:left">New Password</label>
+<div class="col-lg-5">
+<input id="passwordinput" name="passwordinput" type="password" placeholder="" class="form-control input-sm">
+
+</div>
+</div>
+
+<!-- Button -->
+<div class="btn-group pull-right">
+<label class="col-md-4 control-label" for="Save"></label>
+<div class="col-md-4">
+<button id="Save" name="Save" class="btn btn-primary btn-xs custom">Save</button>
+</div>
+</div>
+
+</fieldset>
+</form>						</div>
+<!--    <div class="panel-footer">
+
+</div> 
+-->
+					</div>
+

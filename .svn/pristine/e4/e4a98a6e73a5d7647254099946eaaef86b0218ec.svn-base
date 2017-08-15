@@ -1,0 +1,70 @@
+$(document).ready(function() {
+    $('#togglingForm')
+        .bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            submitHandler: function(validator, form, submitButton) {
+                // Do nothing
+            },
+            fields: {
+                firstName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The first name is required'
+                        }
+                    }
+                },
+                lastName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The last name is required'
+                        }
+                    }
+                },
+                company: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The company name is required'
+                        }
+                    }
+                },
+                
+                mobileNo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The mobile phone number is required'
+                        },
+                        digits: {
+                            message: 'The mobile phone number is not valid'
+                        }
+                    }
+                },
+
+                officeNo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The office phone number is required'
+                        },
+                        digits: {
+                            message: 'The office phone number is not valid'
+                        }
+                    }
+                },
+            }
+        })
+       
+            .on('click', function() {
+                var $target = $($(this).attr('data-toggle'));
+                // Show or hide the additional fields
+                // They will or will not be validated based on their visibilities
+                $target.toggle();
+                if (!$target.is(':visible')) {
+                    // Enable the submit buttons in case additional fields are not valid
+                    $('#togglingForm').data('bootstrapValidator').disableSubmitButtons(false);
+                }
+            });
+});

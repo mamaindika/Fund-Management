@@ -1,0 +1,112 @@
+<%-- 
+
+    Created on : May 5, 2016, 1:47:53 PM
+    Author     : Boc
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblInvestmenttypes" %>
+<!DOCTYPE html>
+<html>
+    <style>.custom {width: 50px !important;}</style>
+    <% TblInvestmenttypes acc = (TblInvestmenttypes) request.getAttribute("searchResult");
+        if (acc != null) {
+    %>
+   <style>
+    .form_errorMsg{
+    color: red;
+    display: none;
+}
+  
+     .custom {width: 50px !important;}
+ </style> 
+    
+    <form   class="form-horizontal" name="editInvestmentType" onsubmit="return formValidation()"  style="width:800px" method="post" action="investmentTypeUpdateController">
+<br> <br> <br> <br>
+        <!-- Form Name -->
+        <h4 style="text-align: left;"><b>Edit Investment Types</b></h4>
+        
+        <br> <br>
+        
+        <div class="form-group" hidden="true">
+            <label class="col-md-2 control-label"  style="text-align:left">ID</label> 
+                <div class="col-md-3">
+                    <input id="id" name="id" type="text" readonly="true" value="<% out.println(acc.getId()); %>"  class="form-control input-sm" s>
+                </div>
+         </div>
+                <div class="form-group">
+            <label class="col-md-2 control-label"  style="text-align:left">Description</label> 
+                <div class="col-md-3">
+                    <input id="description" name="description" value="<% out.println(acc.getDescription()); %>" type="text"  class="form-control input-sm" style="padding-left:10px">
+                </div>
+                <span class="col-md-4 form_errorMsg" id="msg1">Please add your Description !</span>
+        </div>
+    
+             <div class="form-group">
+                        <div class="col-md-7">
+                        <div style="padding-left:40px;">
+                            <input class="btn btn-primary btn-xs custom" onclick="location.href='InvestmentTypesManagePage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; &nbsp;
+                               <input type="submit" class="btn btn-primary btn-xs custom" value="Update"/>
+    </div>
+                        </div>
+                        </div>
+                 
+                                <script>
+                        
+$(document).ready(function() { 
+   	
+ $("#submit").click(
+            function () {
+			
+			if(formValidation()){
+			
+			}
+              
+            }            
+        );
+
+	
+});
+	
+	
+	function formValidation()
+{
+
+var description = document.editInvestmentType.description;
+
+
+  	if(allLetter1(description)){
+	return true;
+	}
+	else{
+    return false;
+	}
+    
+} 
+function allLetter1(description)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\€]+$/;
+    if(description.value.match(letters))
+    {
+	$('#msg1').css("display", "none");
+        return true;
+    }
+    else
+    {
+	 $('#msg1').css("display", "block");
+        //alert('Description must have alphabet characters only');
+        description.focus();
+        return false;
+    }
+}
+</script> 
+                
+          </form>
+
+    <%  }else{  %>
+        Invalid 
+    <%  }  %>
+</html>
+
+

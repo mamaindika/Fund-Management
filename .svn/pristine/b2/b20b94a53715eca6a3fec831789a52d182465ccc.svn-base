@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 21, 2016 10:39:00 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.TblUser" table="tbl_user" catalog="test" optimistic-lock="version">
+        <id name="pfNo" type="int">
+            <column name="pfNo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tblDesignations" class="model.TblDesignations" fetch="select">
+            <column name="designationId" />
+        </many-to-one>
+        <property name="salutations" type="string">
+            <column name="Salutations" length="100" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="firstName" length="100" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="100" />
+        </property>
+        <property name="userName" type="string">
+            <column name="userName" length="100" unique="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="100" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="100" />
+        </property>
+        <property name="officeNo" type="string">
+            <column name="officeNo" length="100" />
+        </property>
+        <property name="mobileNo" type="string">
+            <column name="mobileNo" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <set name="tblRoleassigns" table="tbl_roleassign" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pfNo" unique="true" />
+            </key>
+            <one-to-many class="model.TblRoleassign" />
+        </set>
+        <set name="tblFundassigns" table="tbl_fundassign" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pfNo" unique="true" />
+            </key>
+            <one-to-many class="model.TblFundassign" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+ <%@page import="service.DesignationService"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblDesignations" %>
+<!DOCTYPE html>
+<html>
+     <style>.custom {width: 50px !important;}</style>
+    <% 
+        String id = request.getParameter("id");
+        DesignationService acs = new DesignationService();
+        TblDesignations usr = acs.searchAccount(id);
+        if (usr != null) {
+
+    %>
+
+    <form id="togglingForm" onsubmit="return confirm('Do you really want to delete the designation ?');" class="form-horizontal" style="width:800px" method="post" action="designationDeleteController">
+<br> <br> <br> <br>
+        <!-- Form Name -->
+        <h4 style="text-align: left;"><b>Delete Designation</b></h4>
+<br> <br>
+        <!-- Text input-->
+        <div class="form-group" hidden="true">
+            <label class="col-md-2 control-label"  style="text-align:left">ID</label> 
+                <div class="col-md-3">
+                    <input id="id" name="id" type="text" readonly="true" value="<% out.println(usr.getId()); %>"   class="form-control input-sm" required="">
+                </div>
+                 </div>
+                <div class="form-group">
+            <label class="col-md-2 control-label"  style="text-align:left">Description</label> 
+                <div class="col-md-3">
+                    <input id="description" name="description" readonly="true" value="<% out.println(usr.getDescription()); %>" type="text"  class="form-control input-sm" required="" style="padding-left:10px">
+                </div>
+        </div>
+
+              <div class="form-group">
+                         <div class="col-md-7">
+                        <div style="padding-left:40px;">
+                            <input type="button" class="btn btn-primary btn-xs custom" onclick="location.href='designationpage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+                              <input type="submit" class="btn btn-primary btn-xs custom" value="Delete"/>
+            </div>
+                        </div>
+                        </div>
+        </form>
+
+    <%  }else{  %>
+        Invalid Designation
+    <%  }  %>
+</html>
+
+
+
+

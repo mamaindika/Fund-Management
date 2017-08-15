@@ -1,0 +1,103 @@
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.UserService"%>
+<%@page import="model.TblUser" %>
+<html>
+
+    <div>
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+                <a href="User_AddPage.jsp" class="btn btn-primary ">
+                    <span class="glyphicon glyphicon-plus-sign"></span> 
+                    Add User
+                </a>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+        <form name="searchForm" action="searchController">
+            <div class="row">
+                <div class="col-md-2">  
+                    <div class="form-group">
+                        <label class="control-label" >
+                           User Name
+                        </label>
+                        <input type="text" class="form-control input-sm " id="" name="searchValue" value="" >
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <br /> 
+                  <input type="submit" value="Filter" name="searchButton" class="btn btn-primary btn-sm" />
+
+                </div>  
+            </div>
+        </form>
+        <table class="table table-condensed">
+            <thead style="text-align:left">
+                <tr>
+                    <th style="text-align:right">PF No</th>
+                    
+                    <th>Last Name</th>
+                    <th>User Name</th>
+                 
+                    <th>Designation</th>
+                    <th>Mobile No</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left">
+                <%
+                    UserService  as = new UserService();
+                    List users = as.listUsers();
+                    for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                        TblUser us = (TblUser) iterator.next();
+                %>
+                <tr>
+                    <td style="text-align:right"><%= us.getPfNo() %></td>
+                    
+                    <td><%= us.getLastName() %></td>
+                    <td><%= us.getUserName() %></td>
+                    <td><%= us.getTblDesignations().getDescription()%></td>
+                     <td><%= us.getMobileNo() %></td>
+                    <td><%= us.getStatus() %></td>
+                    <td>
+                    <form name="editForm" action="userEditController" method="post">
+                    <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-sm glyphicon glyphicon-edit" />
+                         <input type="hidden" value="<%= us.getTblDesignations().getId()%>" name="searchValue1" />             
+                        <input type="hidden" value="<%=us.getUserName()%>" name="searchValue" />
+                        <a href="User_DeletePage.jsp?id=<%=us.getUserName()%>" class="btn btn-primary btn-sm  ">Delete</a>
+                    </form>  
+                    </td>
+                    
+                <%  }  %>
+          
+                
+                
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</html>

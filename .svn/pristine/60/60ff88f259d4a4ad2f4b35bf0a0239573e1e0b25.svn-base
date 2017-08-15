@@ -1,0 +1,19 @@
+<%@page import="model.TblFundtypes"%>
+<%@page import="model.TblUser"%>
+<%@page import="service.FundTypesService"%>
+<%@page import="service.UserService"%>
+<%@page import="service.UserService"%>
+<% 
+                if((session.getAttribute("loggedUserId")!=null)&&(session.getAttribute("loggedFundType")!=null)){ 
+                int userId= (Integer)session.getAttribute("loggedUserId"); 
+                int fundId= (Integer)session.getAttribute("loggedFundType"); 
+                    UserService  userSer = new UserService();
+                    FundTypesService fundSer = new FundTypesService();
+                    TblUser logUser = userSer.getUserByuserId(userId);
+                    TblFundtypes logFund=fundSer.getFundByfundId(fundId);
+                    System.out.println(logUser.getLastName()+","+logUser.getMobileNo());  
+                %>
+              
+                <h4 style="text-align: right" value=<%=logFund.getId()%>></h4><h4>Fund Type: <%=logFund.getDescription()%></h4>
+             
+                    <% } %>  

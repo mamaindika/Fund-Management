@@ -1,0 +1,230 @@
+<%-- 
+    Document   : addMasterAccounts
+    Created on : May 11, 2016, 10:36:47 AM
+    Author     : Boc
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblMasteraccounts" %>
+ 
+	<style>
+.form_errorMsg{
+
+    
+    color: red;
+    display: none;
+
+   
+
+
+}
+.custom {width: 50px !important;}
+                </style>
+
+<form id="togglingForm"  method="post" name="addMasterAccounts" onsubmit="return formValidation()" action="addMasterAccountsController"  class="form-horizontal" style="width:800px">
+<!-- Form Name -->
+<br> <br> <br> <br>
+<h4 style="text-align: left;"><b>Master Account Details</b></h4>
+
+<br> <br>
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label" style="text-align:left">Account No</label> 
+<div class="col-md-3">
+<input id="accountNo" name="accountNo" type="text" placeholder="" class="form-control input-sm" style="padding-left:10px">
+
+</div>
+<span class="col-md-3 form_errorMsg" id="msg1">Account No is not valid !</span>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label" style="text-align:left">Name Of Account</label> 
+<div class="col-md-3">
+<input id="accountName" name="accountName" type="text" placeholder="" class="form-control input-sm" >
+
+</div>
+<span class="col-md-3 form_errorMsg" id="msg2">Name Of Account is not valid !</span>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Current Ledger/Book No</label> 
+<div class="col-md-3">
+<input id="CurrentLedger" name="currentLedger" type="text" placeholder="" class="form-control input-sm" >
+
+</div>
+<span class="col-md-4 form_errorMsg" id="msg3">Current Ledger/Book No is not valid !</span>
+</div>
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Type of Account</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="typeOfAccount">
+    <option value="-1">Select</option>
+    <option>Assets</option>
+    <option>Equity</option>
+    <option>Expenses</option>
+    <option>Income</option>
+    <option>Liabilities</option>
+
+  </select>
+</div>
+<span class="col-md-3 form_errorMsg" id="msg4">Type of Account is not valid !</span>
+</div>
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Status</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="status">
+   <option value="-1">Select</option>
+   <option>Active</option>
+   <option>Deceased</option>
+   <option>In-Active </option>
+  
+
+  </select>
+</div>
+<span class="col-md-2 form_errorMsg" id="msg5">Status is not valid !</span>
+</div>
+
+                       <div class="form-group">
+                        <div class="col-md-5">
+                        <div style="padding-left:190px;">
+                            <input type="submit" class="btn btn-primary btn-xs custom" onclick="location.href='MasterAccounts_ManagePage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+                            <input id="submit" type="submit" class="btn btn-primary btn-xs custom" value="Save"/>
+                                    </div>
+                        </div>
+                        </div> 
+
+ <script>
+                        
+$(document).ready(function() { 
+
+ $("#submit").click(
+            function () {
+			
+			if(formValidation()){
+			
+			}
+              
+            }            
+        );
+
+	
+});
+	
+	
+	function formValidation()
+{
+  //alert("The paragraph was clicked.");
+    var accountNo = document.addMasterAccounts.accountNo;
+    var accountName = document.addMasterAccounts.accountName;
+    var CurrentLedger=document.addMasterAccounts.CurrentLedger;
+    var typeOfAccount = document.addMasterAccounts.typeOfAccount;
+    var status = document.addMasterAccounts.status;
+
+ 
+    
+	if(allLetter3(accountNo) && allLetter(accountName) &&allLetter1(CurrentLedger) &&  validateSelect1(typeOfAccount) && validateSelect2(status) ){
+	return true;
+	}
+	else{
+    return false;
+	}
+    
+} 
+function allLetter(uname)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\€]+$/;
+    if(uname.value.match(letters))
+    {
+		$('#msg2').css("display", "none");
+        return true;
+    }
+    else
+    {
+		$('#msg2').css("display", "block");
+        //alert('Username must have alphabet characters only');
+        uname.focus();
+        return false;
+    }
+}
+function allLetter1(uname)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\€]+$/;
+    if(uname.value.match(letters))
+    {
+	$('#msg3').css("display", "none");
+        return true;
+    }
+    else
+    {
+	 $('#msg3').css("display", "block");
+        //alert('Username must have alphabet characters only');
+        uname.focus();
+        return false;
+    }
+}
+
+function allLetter3(uname)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\€]+$/;
+    if(uname.value.match(letters))
+    {
+		$('#msg1').css("display", "none");
+        return true;
+    }
+    else
+    {
+	 $('#msg1').css("display", "block");
+        //alert('Username must have alphabet characters only');
+        uname.focus();
+        return false;
+    }
+}
+
+function validateSelect1(salutations)  
+{  
+    //var numbers = /^[1-4]+$/;
+    if(salutations.value.match(-1))  
+    {   
+	$('#msg4').css("display", "block");
+        salutations.focus();  
+        return false; 
+         
+                
+    }  
+    else  
+    {  
+        $('#msg4').css("display", "none");
+        return true;    
+    }  
+} 
+
+function validateSelect2(gender)  
+{  
+    //var numbers = /^[1-4]+$/;
+    if(gender.value.match(-1))  
+    {   
+	$('#msg5').css("display", "block");
+        gender.focus();  
+        return false; 
+         
+                
+    }  
+    else  
+    {  
+        $('#msg5').css("display", "none");
+        return true;    
+    }  
+} 
+
+</script>
+
+</form>
+
+

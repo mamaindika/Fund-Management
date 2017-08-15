@@ -1,0 +1,73 @@
+<form id="togglingForm" method="post" class="form-horizontal">
+<!-- Form Name -->
+<h4 style="text-align: left;"><b>Master Account Details<b></h4>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="User Name" style="text-align:left">Account No</label> 
+<div class="col-md-3">
+<input id="accountNo" name="accountNo" type="text" placeholder="" class="form-control input-sm" required="" style="padding-left:10px">
+
+</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="PF No" style="text-align:left">Name Of Account</label> 
+<div class="col-md-3">
+<input id="nameOfAccount" name="nameOfAccount" type="text" placeholder="" class="form-control input-sm" required="">
+
+</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="PF No" style="text-align:left">Current Ledger/Book No</label> 
+<div class="col-md-3">
+<input id="CurrentLedger" name="CurrentLedger" type="text" placeholder="" class="form-control input-sm" required="">
+
+</div>
+</div>
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Type of Account</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="TypeofAccount">
+    <option>Select</option>
+    <option>Assets</option>
+    <option>Equity</option>
+    <option>Expenses</option>
+    <option>Income</option>
+    <option>Liabilities</option>
+
+  </select>
+</div>
+</div>
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Status</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="Status">
+    <option>Select</option>
+    <option> </option>
+    <option> </option>
+    <option> </option>
+    <option> </option>
+    <option> </option>
+  
+
+  </select>
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-md-6">
+<div style="padding-left:350px">
+<a href="#" class="btn btn-sm btn-primary">Save<span class="glyphicon"></span></a>&nbsp;<a href="#" class="btn btn-sm btn-primary"><span class="glyphicon"></span>Clear All</a>
+</div>
+</div>
+</div>
+
+</form>

@@ -1,0 +1,191 @@
+<%@page import="model.TblMasteraccounts" %>
+<%@page import="service.masterAccountsService" %>
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+
+<style>
+.form_errorMsg{
+
+    
+    color: red;
+    display: none;
+
+   
+
+
+}
+.custom {width: 50px !important;}
+                </style>
+
+<br>
+<br>
+
+<div id="myform">
+<form action="MasterJournalsAddController" name="addMasterJournals" onsubmit="return formValidation()" method="post" class="form-horizontal">
+    <legend><h4 style="text-align: left;"><b>Account Journals</b></h4> </legend>
+<!-- Form Name -->
+<div class="form-group" >
+<label class="col-md-3 control-label"  style="text-align:left">Journal No</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalNo" name="journalNo">
+</div>
+<span class="col-md-3 form_errorMsg" id="msg1">Journal No is not valid !</span>
+</div>  
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Name</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalName" name="journalName">
+</div>
+<span class="col-md-3 form_errorMsg" id="msg2">Journal Name is not valid !</span>
+</div>             
+            
+            
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Description</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalDescription" name="journalDescription"></textarea>
+</div>
+<span class="col-md-4 form_errorMsg" id="msg3">Journal Description is not valid !</span>
+</div>            
+ <!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Type Of Journal</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="typeOfJournal" name="typeOfJournal">
+    <option value="-1">select</option>
+    <option>Investment</option>
+    <option>Contribution</option>
+    <option>Payments</option>
+    <option>Shares</option>
+
+  </select>
+</div>
+<span class="col-md-3 form_errorMsg" id="msg4">Type of Journal is not valid !</span>
+</div>           
+
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Status</label>
+<div class="col-md-3">
+    <input class="form-control input-sm" id="status" name="status" value="Active" readonly="true">
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-11">
+<div>
+    <input id="submit" type="submit" class="btn btn-primary btn-xs custom" value="Save">
+</div>
+</div>
+</div>
+ 
+ <script>
+                        
+$(document).ready(function() { 
+
+ $("#submit").click(
+            function () {
+			
+			if(formValidation()){
+			
+			}
+              
+            }            
+        );
+
+	
+});
+	
+	
+	function formValidation()
+{
+  //alert("The paragraph was clicked.");
+    var journalNo = document.addMasterJournals.journalNo;
+    var journalName = document.addMasterJournals.journalName;
+    var journalDescription=document.addMasterJournals.journalDescription;
+    var typeOfJournal = document.addMasterJournals.typeOfJournal;
+
+	if(allLetter3(journalNo) && allLetter(journalName) &&allLetter1(journalDescription) &&  validateSelect1(typeOfJournal)){
+	return true;
+	}
+	else{
+    return false;
+	}
+    
+} 
+function allLetter(uname)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\?]+$/;
+    if(uname.value.match(letters))
+    {
+		$('#msg2').css("display", "none");
+        return true;
+    }
+    else
+    {
+		$('#msg2').css("display", "block");
+        //alert('Username must have alphabet characters only');
+        uname.focus();
+        return false;
+    }
+}
+function allLetter1(uname)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\?]+$/;
+    if(uname.value.match(letters))
+    {
+	$('#msg3').css("display", "none");
+        return true;
+    }
+    else
+    {
+	 $('#msg3').css("display", "block");
+        //alert('Username must have alphabet characters only');
+        uname.focus();
+        return false;
+    }
+}
+
+function allLetter3(uname)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\?]+$/;
+    if(uname.value.match(letters))
+    {
+		$('#msg1').css("display", "none");
+        return true;
+    }
+    else
+    {
+	 $('#msg1').css("display", "block");
+        //alert('Username must have alphabet characters only');
+        uname.focus();
+        return false;
+    }
+}
+
+function validateSelect1(salutations)  
+{  
+    //var numbers = /^[1-4]+$/;
+    if(salutations.value.match(-1))  
+    {   
+	$('#msg4').css("display", "block");
+        salutations.focus();  
+        return false; 
+         
+                
+    }  
+    else  
+    {  
+        $('#msg4').css("display", "none");
+        return true;    
+    }  
+} 
+
+
+</script>
+ 
+</form>
+</div>
+
+
+

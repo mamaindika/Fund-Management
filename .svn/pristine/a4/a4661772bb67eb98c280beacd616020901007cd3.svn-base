@@ -1,0 +1,63 @@
+<%@page import="model.TblMasteraccounts" %>
+<%@page import="service.masterAccountsService" %>
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<style>.custom {width: 50px !important;}</style>
+<div id="myform">
+<form action="MasterJournalsAddController" method="post" class="form-horizontal">
+<h4 style="text-align: left;"><b>Account Journals</b></h4> 
+<!-- Form Name -->
+<div class="panel panel- active">
+<div class="panel-heading" style="text-align: left; background-color:#ADD8E6"><b>Master Journal Details<b></div>
+
+<div class="panel-body">  
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Name</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalName" name="journalName">
+</div>
+</div>             
+            
+            
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Description</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalDescription" name="journalDescription"></textarea>
+</div>
+</div>            
+ <!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Type Of Journal</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="typeOfJournal" name="typeOfJournal">
+    <option>select</option>
+    <option>Investment</option>
+    <option>Contribution</option>
+    <option>Payments</option>
+    <option>Shares</option>
+
+  </select>
+</div>
+</div>           
+
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Status</label>
+<div class="col-md-3">
+    <input class="form-control input-sm" id="status" name="status" value="Active" readonly="true">
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-11">
+<div>
+    <input type="submit" class="btn btn-primary btn-xs custom" value="Save">
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+

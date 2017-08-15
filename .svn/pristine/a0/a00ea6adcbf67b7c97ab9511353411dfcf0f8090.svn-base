@@ -1,0 +1,180 @@
+<form id="togglingForm" method="post" class="form-horizontal">
+<!-- Form Name -->
+<h4 style="text-align: left;"><b>Master Journal Details<b></h4>
+
+<div class="form-group">
+<label class="col-md-3 control-label" for="Journal Description" style="text-align:left">Journal Description</label>
+<div class="col-md-3"> 
+<textarea class="form-control input-sm" id="JournalDescription" name="JournalDescription"></textarea>
+</div>
+</div>            
+ <!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Type Of Journal</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="TypeOfJournal">
+     <option>select</option>
+    <option>Investment</option>
+    <option>Inwards</option>
+    <option>Outwards</option>
+    <option>Shares</option>
+
+  </select>
+</div>
+</div>           
+
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Status</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="Status">
+    <option>select</option>
+    <option>.</option>
+    <option>. </option>
+    <option>. </option>
+    <option>. </option>
+
+  </select>
+</div>
+</div>    
+ <div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Process</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="Process">
+    <option>Credit</option>
+    <option>Debit</option>
+    
+
+  </select>
+</div>
+</div>  
+
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Account Number</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="AccountNumber">
+    <option>select</option>
+    <option>.</option>
+    <option>. </option>
+    <option>. </option>
+    <option>. </option>
+
+  </select>
+</div>
+</div>   
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="User Name" style="text-align:left">Account Name</label> 
+<div class="col-md-3">
+<input id="AccountName" name="AccountName" type="text" placeholder="" class="form-control input-sm" required="" style="padding-left:10px">
+
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-12">
+<div style="padding-left:800px">
+<a href="#" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus-sign"></span></a>&nbsp;<a href="#" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-minus-sign"></span></a>
+</div>
+</div>
+</div>
+<table class="table">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							Process
+						</th>
+						<th>
+							Account No
+						</th>
+						<th>
+							Account Name
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+					<tr class="active">
+						<td>
+						
+						</td>
+						<td>
+						
+						</td>
+						<td>
+						
+						</td>
+						<td>
+						
+						</td>
+					</tr>
+					<tr class="success">
+						<td>
+						
+						</td>
+						<td>
+						
+						</td>
+						<td>
+						
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+					<tr class="warning">
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+					<tr class="danger">
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+<div class="form-group">
+<div class="col-md-12">
+<div style="padding-left:800px">
+<a href="#" class="btn btn-sm btn-primary">Save<span class="glyphicon"></span></a>&nbsp;<a href="#" class="btn btn-sm btn-primary"><span class="glyphicon"></span>Clear All</a>
+</div>
+</div>
+</div>
+</form>
+
+

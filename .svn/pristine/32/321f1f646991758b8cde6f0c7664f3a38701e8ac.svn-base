@@ -1,0 +1,53 @@
+<%-- 
+    Document   : updateDesignation
+    Created on : May 6, 2016, 10:49:58 AM
+    Author     : Boc
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblUserroles" %>
+<!DOCTYPE html>
+<html lang="en"> 
+  <% TblUserroles acc= (TblUserroles) request.getAttribute("searchResult"); 
+ 
+        if (acc !=null) 
+                {
+ 
+                %>
+               
+                <form id="togglingForm"  class="form-horizontal"  style="width:800px">
+
+<!-- Form Name -->
+<h4 style="text-align: left;"><b>Edit Roles</b></h4>
+
+ <!-- Text input-->
+ <div class="form-group" hidden="true">
+                        <label class="col-md-2 control-label" for="id" style="text-align:left">Designation ID</label> 
+                        <div class="col-md-3">
+                            <input id="id" name="id" type="text" placeholder="id" value="<% out.println(acc.getId()); %> " class="form-control input-sm" required="">
+                        </div>
+                    </div>
+                        
+        <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="description" style="text-align:left">Profile Description</label> 
+                        <div class="col-md-3">
+                             <input id="description" name="description" value="<% out.println(acc.getDescription()); %>" type="text" placeholder="description" class="form-control input-sm" required="" style="padding-left:10px">
+                        </div>
+                    </div>
+
+
+<input type="submit" class="btn btn-sm btn-primary" value="Edit"/>
+
+</form>
+   
+               <%
+                       }
+          %>
+
+</html>
+
+
+
+
+

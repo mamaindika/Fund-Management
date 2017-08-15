@@ -1,0 +1,51 @@
+<%@page import="model.TblAccountJournalmapping"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.MasterJournalsService"%>
+
+<table class="table table-bordered"  id="Journal"  >
+            <thead style="text-align:left">
+                <tr class="">
+                    <th>Journal Name</th>
+                    <th>Account Name</th>
+                    <th>Process</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left">
+                <%
+                    MasterJournalsService as = new MasterJournalsService();
+                    List users = as.listMappedAccountJournalmapping();
+                    for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                        TblAccountJournalmapping us = (TblAccountJournalmapping) iterator.next();
+                %>
+                <tr class="<%= us.getTblMasterjournals().getJournalName()%>">
+                    <td><%= us.getTblMasterjournals().getJournalName()%></td>
+                    <td><%= us.getTblMasteraccounts().getAccountName()%></td>
+                    <td><%= us.getProcess()%></td>
+                   
+                    
+                     <form name="editForm" action="Account_JournalEditController" method="post">
+                        <div class="row">
+                            <div class="col-md-2">  
+                                <div class="form-group">
+                                <td> <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-xs custom" /> </td>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="hidden" value="<%=us.getId() %>" name="searchValue" />
+                                <input type="hidden" value="<%=us.getTblMasteraccounts().getAccountNo()%>" name="searchValue1" />             
+                                <input type="hidden" value="<%=us.getTblMasterjournals().getJournalNo()%>" name="searchValue2" />
+                                <td> <a href="Account_Journal_DeletePage.jsp?id=<%=us.getId() %>" class="btn btn-primary btn-xs custom">Delete</a> </td>
+                                </div>
+                        </div>
+                    </form>  
+                    
+                    
+                <%  }  %>
+          
+                
+                
+                </tr>
+            </tbody>
+        </table>

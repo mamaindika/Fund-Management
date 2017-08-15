@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 3, 2016 1:27:34 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.TblMasteraccounts" table="tbl_masteraccounts" catalog="test" optimistic-lock="version">
+        <id name="accountNo" type="int">
+            <column name="accountNo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tblFundtypes" class="model.TblFundtypes" fetch="select">
+            <column name="fundId" />
+        </many-to-one>
+        <property name="accountName" type="string">
+            <column name="accountName" length="100" />
+        </property>
+        <property name="currentLedger" type="string">
+            <column name="currentLedger" length="100" />
+        </property>
+        <property name="typeOfAccount" type="string">
+            <column name="typeOfAccount" length="100" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="100" />
+        </property>
+        <set name="tblAccountJournalmappings" table="tbl_account_journalmapping" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="accountNo" />
+            </key>
+            <one-to-many class="model.TblAccountJournalmapping" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,98 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblUserroles" %>
+
+<style>
+     .form_errorMsg{
+
+    
+    color: red;
+    display: none;
+
+   
+
+
+}
+  
+     .custom {width: 50px !important;}
+ </style>
+ 
+<form  method="post"  action="userRolesAddController" name="adduserRole" onsubmit="return formValidation()"   class="form-horizontal" style="width:800px">
+    <br> <br> <br> <br>
+                        <!-- Form Name -->
+                        <h4 style="text-align: left;"><b>Add New User Role</b></h4>
+<br> <br>
+                        <!-- Text input-->
+     
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">Description</label> 
+                            <div class="col-md-3">
+                                <input id="description" name="description" value="" type="text"  class="form-control input-sm" style="padding-left:10px">
+                            </div>
+                       <span class="col-md-4 form_errorMsg" id="msg1">Please add your Description !</span>
+                        </div>
+                        
+                          <div class="form-group">
+                        <div class="col-md-5">
+                        <div style="padding-left:190px;">
+                            <input class="btn btn-primary btn-xs custom" onclick="location.href='UserRole_ManagePage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+                             <input id="submit" type="submit" class="btn btn-primary btn-xs custom" value="Save"/>
+                                    </div>
+                        </div>
+                        </div> 
+
+                          <script>
+                        
+$(document).ready(function() { 
+   	
+ $("#submit").click(
+            function () {
+			
+			if(formValidation()){
+			
+			}
+              
+            }            
+        );
+
+	
+});
+	
+	
+	function formValidation()
+{
+
+var description = document.adduserRole.description;
+
+
+  	if(allLetter1(description)){
+	return true;
+	}
+	else{
+    return false;
+	}
+    
+} 
+function allLetter1(description)
+{
+    var letters = /^[A-Za-z\u0080-\u00FF\d\s\€]+$/;
+    if(description.value.match(letters))
+    {
+	$('#msg1').css("display", "none");
+        return true;
+    }
+    else
+    {
+	 $('#msg1').css("display", "block");
+        //alert('Description must have alphabet characters only');
+        description.focus();
+        return false;
+    }
+}
+</script>                                 
+                        
+                        
+                        
+                    </form>
+

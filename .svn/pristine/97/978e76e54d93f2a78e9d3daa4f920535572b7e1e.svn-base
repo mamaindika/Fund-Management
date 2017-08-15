@@ -1,0 +1,65 @@
+<form id="togglingForm" method="post" class="form-horizontal">
+<!-- Form Name -->
+<h4 style="text-align: left;"><b>Contribution</b></h4>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="RefID" style="text-align:left">Detail</label> 
+<div class="col-md-3">
+<input id="Detail" name="Detail" type="text" placeholder="" class="form-control input-sm" required="" style="padding-left:10px">
+
+</div>
+</div>
+
+
+
+<!-- Text input-->
+<div class="form-group" id="sandbox-container">
+<label class="col-md-3 control-label" for="PF No" style="text-align:left">Transaction  Date</label> 
+<div class="col-md-3">
+<div class="input-group date"  >
+  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div></div>
+<script>
+        $('#sandbox-container .input-group.date').datepicker({
+    todayBtn: "linked",
+    toggleActive: true
+});
+</script>
+
+</div>
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Journal Entry </label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1" name="Journal Entry">
+     <option>select</option>
+    <option>Chief Manager</option>
+    <option>Senior Manager</option>
+    <option>Senior Executive Officer</option>
+    <option>Executive Officer</option>
+
+  </select>
+</div>
+</div>
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label" for="sel1" style="text-align:left">Transaction Amount</label>
+<div class="col-md-3">
+<input id="Detail" name="Detail" type="text" placeholder="" class="form-control input-sm" required="" style="padding-left:10px">
+
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-md-6">
+<div style="padding-left:350px">
+<a href="#" class="btn btn-sm btn-primary">Save<span class="glyphicon"></span></a>&nbsp;<a href="#" class="btn btn-sm btn-primary"><span class="glyphicon"></span>Clear All</a>
+</div>
+</div>
+</div>
+</form>
+
+

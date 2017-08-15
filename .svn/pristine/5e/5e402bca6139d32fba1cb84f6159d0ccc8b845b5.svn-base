@@ -1,0 +1,209 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package service;
+
+import model.TblUser;
+import model.TblUsercredentials;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+import java.util.Iterator;
+import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+
+/**
+ *
+ * @author boc
+ */
+public class UserService {
+  public String addUser(TblUser acc) {
+        String message = null;
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tr = s.getTransaction();
+            tr.begin();
+            s.save(acc);
+            tr.commit();
+            
+            
+            message = "Saved Data";
+            return message;
+        } catch (Exception e) {
+            return (e.getMessage());
+        } finally {
+            s.close();
+        }
+
+    }
+
+    public TblUser searchAccount(String userName) {
+        String message = null;
+        Session session = null;
+        Transaction tx = null;
+        TblUser user = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblUser where userName='" + userName + "'");
+            user = (TblUser) query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+
+    public String updateUser(TblUser acc) {
+        String message = null;
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tr = s.getTransaction();
+            tr.begin();
+            s.update(acc);
+            tr.commit();
+            message = "Saved Data";
+            return message;
+        } catch (Exception e) {
+            return (e.getMessage());
+        } finally {
+            s.close();
+        }
+
+    }
+    
+
+    
+    
+      public String deleteUser(TblUser acc) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tr = s.getTransaction();
+            tr.begin();
+            s.delete(acc);
+            tr.commit();
+            return "Deleted User";
+        } catch (Exception e) {
+            return (e.getMessage());
+        } finally {
+            s.close();
+        }
+
+    }
+ public TblUser getUserByuserName(String userName) {
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        TblUser loggedUser = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblUser where userName='"+userName+"'");
+            loggedUser = (TblUser)query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return loggedUser;
+    }
+ 
+ public TblUser getUserByuserId(int userId) {
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        TblUser loggedUser = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblUser where pfNo='"+userId+"'");
+            loggedUser = (TblUser)query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return loggedUser;
+    }
+ 
+    public List listUsers() {
+        List users = null;
+        try {
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        users = session.createCriteria(TblUser.class).list();   //returns all matching rows.         
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } 
+        return users;
+    }
+    
+    public List LoggedUser() {
+        List loggedUser = null;
+        try {
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        loggedUser = session.createCriteria(TblUser.class).list();   //returns all matching rows.         
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } 
+        return loggedUser;
+    }
+     public List listAllActiveUsers() {
+        List users1 = null;
+        try {
+      Session session =HibernateUtil.getSessionFactory().openSession();
+        users1 = session.createCriteria(TblUser.class).list();   //returns all matching rows.         
+        } catch (HibernateException e) {
+         e.printStackTrace(); 
+      }
+        return users1;
+   }
+//       public List listDesignations() {
+//        List users = null;
+//        try {
+//        Session session =HibernateUtil.getSessionFactory().openSession();
+//        users = session.createCriteria(TblDesignations.class).list();   //returns all matching rows.         
+//        } catch (HibernateException e) {
+//            e.printStackTrace();
+//        } 
+//        return users;
+//    }
+    
+       public String userCredentials(TblUsercredentials cre) {
+        String message = null;
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tr = s.getTransaction();
+            tr.begin();
+            s.save(cre);
+            tr.commit();
+            message = "Saved Data";
+            return message;
+        } catch (Exception e) {
+            return (e.getMessage());
+        } finally {
+            s.close();
+        }
+
+    }
+
+}

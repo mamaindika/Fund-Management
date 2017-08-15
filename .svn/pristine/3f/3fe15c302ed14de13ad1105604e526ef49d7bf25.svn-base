@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 15, 2016 8:43:16 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.TblUsercredentials" table="tbl_usercredentials" catalog="test" optimistic-lock="version">
+        <id name="userId" type="string">
+            <column name="userId" length="100" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tblUser" class="model.TblUser" fetch="select">
+            <column name="pfNo" />
+        </many-to-one>
+        <property name="password" type="string">
+            <column name="password" length="100" />
+        </property>
+        <property name="loginStatus" type="java.lang.Integer">
+            <column name="loginStatus" />
+        </property>
+        <property name="firstLogin" type="java.lang.Integer">
+            <column name="firstLogin" />
+        </property>
+    </class>
+</hibernate-mapping>

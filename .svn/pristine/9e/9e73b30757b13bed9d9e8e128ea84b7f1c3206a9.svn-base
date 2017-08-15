@@ -1,0 +1,87 @@
+<%-- 
+    Document   : journalDelete
+    Created on : Jun 16, 2016, 9:11:25 AM
+    Author     : boc
+--%>
+
+<%@page import="model.TblMasterjournals" %>
+<%@page import="service.MasterJournalsService" %>
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<style>.custom {width: 50px !important;}</style>
+   <% 
+        int id = Integer.parseInt(request.getParameter("id"));
+        MasterJournalsService acs = new MasterJournalsService();
+        TblMasterjournals usr = acs.searchAccount(id);
+        if (usr != null) {
+
+    %>
+<div id="myform">
+<form action="MasterJournalsDeleteController" method="post" class="form-horizontal" onsubmit="return confirm('Do you really want to delete the designation ?');">
+<h4 style="text-align: left;"><b>Account Journals</b></h4> 
+<!-- Form Name -->
+<div class="panel panel- active">
+<div class="panel-heading" style="text-align: left; background-color:#ADD8E6"><b>Master Journal Details<b></div>
+<div class="panel-body">  
+<div class="form-group" hidden="true">
+<label class="col-md-3 control-label"  style="text-align:left">Journal id</label>
+<div class="col-md-3"> 
+    <input class="form-control input-sm" id="id" name="id" value="<% out.println(usr.getId());%>">
+</div>
+</div>      
+<div class="panel-body">  
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Name</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalName" name="journalName" value="<% out.println(usr.getJournalName());%>" readonly="true">
+</div>
+</div>             
+            
+            
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Journal Description</label>
+<div class="col-md-3"> 
+<input class="form-control input-sm" id="journalDescription" name="journalDescription" value="<% out.println(usr.getJournalDescription());%>" readonly="true">
+</div>
+</div>            
+ <!-- select-->
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Type Of Journal</label>
+<div class="col-md-3">
+    <select class="form-control input-sm" id="typeOfJournal" name="typeOfJournal" value="<% out.println(usr.getTypeOfJournal());%>" readonly="true">
+   <option><% out.println(usr.getTypeOfJournal());%></option>
+    <option>Investment</option>
+    <option>Contribution</option>
+    <option>Payments</option>
+    <option>Shares</option>
+
+  </select>
+</div>
+</div>           
+
+<div class="form-group">
+<label class="col-md-3 control-label"  style="text-align:left">Status</label>
+<div class="col-md-3">
+    <input class="form-control input-sm" id="status" name="status" value="Active" readonly="true">
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-11">
+<div>
+    <input type="button" class="btn btn-primary btn-xs custom" onclick="location.href='MasterJournals.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+    <input type="submit" class="btn btn-primary btn-xs custom" value="Delete">
+</div>
+</div>
+</div>
+ </div>
+</div>
+</form>
+
+</div>
+
+<%  }else{  %>
+       
+    <%  }  %>

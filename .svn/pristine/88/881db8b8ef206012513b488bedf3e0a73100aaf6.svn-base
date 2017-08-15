@@ -1,0 +1,83 @@
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.FundTypesService"%>
+<%@page import="model.TblFundtypes" %>
+<html>
+    <style>
+            .custom {
+    width: 50px !important;
+}
+    </style>
+    <br>  <br>  <br>  <br>
+    <div>
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+                  <a href="FundType_AddPage.jsp" class="btn btn-primary ">
+                    <span class="glyphicon glyphicon-plus-sign"></span> 
+                    Add Fund Type
+                </a>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+        <div class="row">
+        
+        </div>
+
+                        
+
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+
+        <div class="row" align="center">
+                    
+        <table class="table table-bordered" style="width:60%; align-content: center">   
+            <thead style="text-align:left">
+                <tr>
+                    
+                    <th style="text-align:center">Description</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left">
+                <%
+                    FundTypesService as = new FundTypesService();
+                    List users = as.listFundTypes();
+                    for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                        TblFundtypes us = (TblFundtypes) iterator.next();
+                %>
+                <tr>
+                   
+                    <td style="width: 60%"><%= us.getDescription()%></td>
+                    
+                    <td style="width: 40%; text-align: center">
+                    <form name="editForm" action="fundTypeEditController" method="post">
+                    <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-xs custom" />
+                    <input type="hidden" value="<%=us.getId() %>" name="searchValue" />
+                   
+                    <a href="FundType_DeletePage.jsp?id=<%=us.getId()%>" class="btn btn-primary btn-xs custom">Delete</a>
+                       
+                    </form>  
+                    </td>
+                       
+                <%  }  %>
+          
+                
+                
+                </tr>
+            </tbody>
+        </table>
+        </div></div>
+</html>

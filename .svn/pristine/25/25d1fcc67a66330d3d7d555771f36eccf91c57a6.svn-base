@@ -1,0 +1,43 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblInvestmenttypes" %>
+
+<form id="togglingForm"  method="post" name="addInvestments" action="investmentTypeAddController"  class="form-horizontal" style="width:800px">
+    <br> <br> <br> <br>
+                        <!-- Form Name -->
+                        <h4 style="text-align: left;"><b>Add Investment Type</b></h4>
+<br> <br>
+                        <!-- Text input-->
+     
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">Description</label> 
+                            <div class="col-md-3">
+                                <input id="description" name="description" value="" type="text"  class="form-control input-sm" required="" style="padding-left:10px">
+                            </div>
+
+                        </div>
+                        
+                          <div class="form-group">
+                        <div class="col-md-5">
+                        <div style="padding-left:190px;">
+                            <input type="submit" class="btn btn-sm btn-primary" onclick="location.href='InvestmentTypesManagePage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+                             <input type="submit" class="btn btn-sm btn-primary" value="Save"/>
+                                    </div>
+                        </div>
+                        </div> 
+
+                    </form>
+
+                    <h2>
+                        <%
+                            String rMessage = request.getParameter("message");
+                            if (rMessage == null) {
+                                rMessage = "";
+                            }
+                            out.println(rMessage);
+
+                        %>
+                    </h2>
+
+                    

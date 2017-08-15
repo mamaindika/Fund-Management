@@ -1,0 +1,95 @@
+<%@page import="service.UserService"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.UserRolesService"%>
+<%@page import="model.TblUserroles" %>
+<%@page import="model.TblRoleassign"%>
+<%@page import="model.TblUserroles"%>
+<%@page import="model.TblUser"%>
+<html>
+     <style>.custom {width: 50px !important;}</style>
+     <br>  <br>  <br>
+    <div>
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+                <a href="AddRolesAssign_Page.jsp" class="btn btn-primary ">
+                    <span class="glyphicon glyphicon-plus-sign"></span> 
+                    Assign Roles
+                </a>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+       <!-- <form name="searchForm" action="searchController">
+            <div class="row">
+                <div class="col-md-2">  
+                    <div class="form-group">
+                        <label class="control-label" for="id">
+                            Designation ID
+                        </label>
+                        <input type="text" class="form-control input-sm" id="id" name="searchValue" value="" >
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <br /> 
+                  <input type="submit" value="Filter" name="searchButton" class="btn btn-primary btn-sm" />
+
+                </div>  
+            </div>
+        </form> -->
+  <table class="table table-bordered">
+            <thead style="text-align:left">
+                <tr>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left">
+                <%
+                    UserRolesService as = new UserRolesService ();
+                    List users1 = as.listassignRoles();
+                    for (Iterator iterator = users1.iterator(); iterator.hasNext();) {
+                        TblRoleassign us = (TblRoleassign) iterator.next();
+                %>
+                <tr>
+                   
+                    <td><%= us.getTblUser().getPfNo()%></td>
+                    <td><%= us.getTblUserroles().getDescription()%></td>
+                    <td>
+                    <form name="RoleAssignEdit" action="RoleAssignEditController" method="post">
+                    <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-xs custom" />
+                    <input type="hidden" value="<%=us.getTblUser().getPfNo()%>" name="searchValue" />             
+                    <input type="hidden" value="<%=us.getTblUserroles().getId()%>" name="searchValue1" />
+<% System.out.println("ttttttttttttttttttttttttttttt"+us.getTblUser().getPfNo());%>
+                    </form>  
+                    </td>
+                    
+                <%  }  %>
+         
+                </tr>
+            </tbody>
+        </table>
+	
+
+    </div>
+</html>

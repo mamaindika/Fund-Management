@@ -1,0 +1,82 @@
+<div class="span3">
+     <div class="well" style="background-color:#ADD8E6" margin="0px">
+        <div>
+            <ul class="nav nav-list">
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Set Up</label>
+    <ul class="nav nav-list tree" style="font-size:small">  
+<li style="text-align: left; padding-left:5px"><a href="designationpage.jsp">Designation</a></li>
+
+    </ul>
+                </li>
+                <!-- <li class="divider"></li> -->
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">User Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:10px; color:black">
+                        <li style="text-align: left; padding-left:5px"><a href="manageuserpage.jsp">User Accounts</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="userroles.jsp">User Roles</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="#">User Role Rights</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="roleassignpage_1.jsp">User Role Assignment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="FundAssign_ManagePage.jsp">User Fund Type Permission</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="#">User Role Report Permission </a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="">User Password Reset</a></li>
+                    </ul>
+                </li>
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Fund Type Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="fundtypes.jsp">Fund Types</a></li>
+                       
+                    </ul>
+                </li>
+ <li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Account Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="masterAccountsPage.jsp">Master Accounts</a></li>
+                          <li style="text-align: left; padding-left:5px"><a href="MasterJournals.jsp">Master Journals</a></li>
+                          
+                        <li style="text-align: left; padding-left:5px"><a href="">Account-Fund Type Assignment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="Account_Journal_ManagePage.jsp">Account Journal Mapping</a></li> 
+                    </ul>
+                </li>
+ <li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Investment Type Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="InvestmentTypesManagePage.jsp">Master Investment Types</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="#">Investment Type-Fund Type Assignment</a></li>
+                    </ul>
+                </li>
+
+ <li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Cash Flow</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="InwardRemittance.jsp">Contributions</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="PaymentsPage.jsp">Payments</a></li>
+                    </ul>
+                </li>
+ <li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Investment Administration</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="openinvestment.jsp">Open Investment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="closeInvestment.jsp">Close Investment</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="#">View Investment</a></li>
+                    </ul>
+                </li>
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Reports</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="#">Balance sheet</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="#">Maturity Investments</a></li>
+                        <!--  <li style="text-align: left; padding-left:5px"><a href="#"></a></li> -->
+                    </ul>
+                </li>             
+<li style="text-align: left;"><label class="tree-toggle nav-header" style="color:black; font-size:12px;">Profile</label>
+                    <ul class="nav nav-list tree" style="font-size:small">
+                        <li style="text-align: left; padding-left:5px"><a href="changepassword.jsp">Password Change</a></li>
+                        <li style="text-align: left; padding-left:5px"><a href="updateuser.jsp">User Data Modify</a></li>
+                        <!--  <li style="text-align: left; padding-left:5px"><a href="#"></a></li> -->
+                    </ul>
+                </li>                   
+                       
+            </ul>
+        </div>
+    </div>
+    </div>
+
+<script>
+$('.tree-toggle').click(function () {
+	$(this).parent().children('ul.tree').toggle(200);
+});
+</script>

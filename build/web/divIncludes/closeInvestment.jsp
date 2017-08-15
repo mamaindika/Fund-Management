@@ -1,0 +1,206 @@
+<%@page import="model.TblMasterjournals"%>
+<%@page import="model.TblAccountJournalmapping"%>
+<%@page import="service.MasterJournalsService"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="model.TblInvestments"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="service.InvestmentTypesService"%>
+<%@page import="model.TblInvestmenttypes"%>
+
+<html>
+    <style>.custom {width: 50px !important;}</style>
+    <% TblInvestments acc = (TblInvestments) request.getAttribute("searchResult");
+       TblInvestmenttypes ac = (TblInvestmenttypes) request.getAttribute("searchResult1");
+       TblMasterjournals a=(TblMasterjournals) request.getAttribute("searchResult2");
+       if ((acc != null)&&(ac!=null)&&(a != null)) {
+
+    %>
+<body>  
+    
+<legend><h4 style="text-align: left;"><b>CLOSE INVESTMENT</b></h4></legend>
+<div>
+<form action="InvestmentCloseController" method="post" id="add" name="add" class="form-horizontal">
+
+<div class="form-group" hidden="true">
+<label class="col-md-2 control-label" style="text-align:left">id</label>  
+<div class="col-md-3">
+<input id="id" name="id" type="text" placeholder="" value="<% out.println(acc.getId()); %>" class="form-control input-sm">
+</div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-md-2 control-label" style="text-align:left">Investment Type</label> 
+        <div class="col-md-3">
+            <select class="form-control input-sm" id="InvestmentType" name="InvestmentType">
+                <option value=<%=ac.getId()%>><% out.println(ac.getDescription()); %></option>
+            <%
+            InvestmentTypesService InveSer = new InvestmentTypesService();
+            List inves = InveSer.listInvestments();
+                  
+            for (Iterator iterator = inves.iterator(); iterator.hasNext();) {
+                TblInvestmenttypes tblInvestmenttypes = (TblInvestmenttypes) iterator.next();
+                request.setAttribute("InvestmentType",tblInvestmenttypes);
+          if(ac.getId()!=tblInvestmenttypes.getId()){
+            %>
+            <option value=<%=tblInvestmenttypes.getId()%>><%= tblInvestmenttypes.getDescription()%></option> 
+            <% System.out.println("test88"+tblInvestmenttypes.getId());%>
+        <%  }}  %>
+            </select>
+    </div>
+</div>  
+            
+<div class="form-group">
+<label class="col-md-2 control-label"  style="text-align:left">Journal Entry</label>
+<div class="col-md-3">
+<select class="form-control input-sm" value="<% out.println(a.getJournalName()); %>" id="JournalEntry" name="JournalEntry">  
+        <option value=<%=a.getJournalNo()%>><% out.println(a.getJournalName()); %></option>
+            <%
+            MasterJournalsService ms = new MasterJournalsService();
+            List listjournals= ms.listMasterjournals();
+            for (Iterator iterator = listjournals.iterator(); iterator.hasNext();){
+                  TblMasterjournals as = (TblMasterjournals) iterator.next();
+                  request.setAttribute("JournalName",as);
+                       if(a.getJournalNo()!=as.getJournalNo()){
+            %>
+        <option value=<%=as.getJournalNo()%>><%= as.getJournalName()%></option> 
+            <%  }}  %>
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label" style="text-align:left">Reference No</label>  
+<div class="col-md-3">
+<input id="referenceNo" name="referenceNo" type="text" placeholder="" value="<% out.println(acc.getReferenceNo()); %>" class="form-control input-sm"> 
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label" for="ReceiptNo" style="text-align:left">Receipt No</label>  
+<div class="col-md-3">
+<input id="ReceiptNo" name="ReceiptNo" type="text" value="<% out.println(acc.getReceiptNo()); %>" placeholder="" class="form-control input-sm">
+</div>
+</div>
+
+<div class="form-group" id="sandbox-container">
+<label class="col-md-2 control-label"  style="text-align:left">Invest Date</label> 
+<div class="col-md-3">
+<div class="input-group date">
+<input type="text" id="date1" value="<% out.println(acc.getInvestDate()); %>" name="InvestDate" class="form-control input-sm"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div></div>
+<script>
+        $('#sandbox-container .input-group.date').datepicker({
+    todayBtn: "linked",
+    toggleActive: true
+});
+</script>
+<label class="col-md-2 control-label" for="MatureDate" style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;Mature Date</label> 
+<div class="col-md-3">
+<div class="input-group date"  >
+<input type="text" id="date2" name="MatureDate" value="<% out.println(acc.getMatureDate()); %>" class="form-control input-sm"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div></div>
+<script>
+        $('#sandbox-container .input-group.date').datepicker({
+    todayBtn: "linked",
+    toggleActive: true
+});
+</script>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label"  style="text-align:left">No of Days</label>  
+  <div class="col-md-3">
+  <input id="calculated" name="NoOfDays" value="<% out.println(acc.getNoOfDays()); %>" type="text" placeholder="" class="form-control input-sm" required="">
+  </div>
+</div>
+<script type="text/javascript">//<![CDATA[
+$(function(){
+$(document).ready(function () {
+    var selector = function (dateStr) {
+            var d1 = $('#date1').datepicker('getDate');
+            var d2 = $('#date2').datepicker('getDate');
+            var diff = 0;
+            if (d1 && d2) {
+                diff = Math.floor((d2.getTime() - d1.getTime()) / 86400000); // ms per day
+            }
+            $('#calculated').val(diff);
+        }
+    $("#date1").datepicker({
+        minDate: new Date(2012, 7 - 1, 8),
+        maxDate: new Date(2012, 7 - 1, 28)
+    });
+    $('#date2').datepicker({ 
+        minDate: new Date(2012, 7 - 1, 9),
+        maxDate: new Date(2012, 7 - 1, 28)
+    });
+    $('#date1,#date2').change(selector)
+});
+});//]]> 
+
+</script>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Amount" style="text-align:left">Amount</label>  
+  <div class="col-md-3">
+  <input id="Amount" name="Amount" type="text" value="<% out.println(acc.getAmount()); %>"  placeholder="" class="form-control input-sm" required="">
+  </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label" for="Tax Rate" style="text-align:left">Tax Rate</label>
+    <div class="col-md-3" style="text-align:left"> 
+    <input type="radio" name="TaxRate1" value="<% out.println(acc.getTaxRate()); %>">
+    <label >WHTR</label>
+    <input type="radio" name="TaxRate" checked="checked">
+    <label>Notion Tax Rate</label>
+    <div class="reveal-if-active">
+    <label class="col-md-2 control-label"  style="text-align:left">Value</label>
+    <input type="text" id="" name="TaxValue" value="<% out.println(acc.getTaxValue()); %>" class="form-control input-sm" data-require-pair="#">
+    </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label" for="Interest Rate" style="text-align:left">Interest Rate</label>
+    <div class="col-md-3" style="text-align:left"> 
+    <input type="radio" name="InterestRate" value="<% out.println(acc.getInterestRate()); %>">
+    <label>Fixed </label>
+    <input type="radio" name="InterestRate" >
+    <label>Floating</label>
+    <div class="reveal-if-active">
+    <label class="col-md-2 control-label"  style="text-align:left">Value</label>
+    <input type="text" id="Fixed" name="InterestValue" value="<% out.println(acc.getInterestValue()); %>"  class="form-control input-sm" data-require-pair="#">
+    </div>
+    </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Interest at" style="text-align:left">Interest at</label>
+  <div class="col-md-3" style="text-align:left"> 
+    <label class="radio-inline" for="radios-2" style="text-align:left">
+      <input type="radio" name="InterestAt" id="radios-2" value="<% out.println(acc.getInterestAt()); %>" checked="checked" >
+      Maturity
+    </label> 
+    <label class="radio-inline" for="radios-3" style="text-align:left">
+      <input type="radio" name="InterestAt" id="radios-3" value="A">
+      Annually
+    </label> 
+  </div>
+</div>
+      
+<div class="form-group">
+<div class="col-md-5">
+    <div style="padding-left:150px;"><br><br>
+    <input type="submit" class="btn btn-primary btn-xs custom" value="Close"/>
+    <a href="CloseInvestmentManagePage.jsp"  class="btn btn-primary btn-xs custom">Back</a> 
+    </div>
+</div>
+</div> 
+      
+</form>
+<%  }else{  %>    
+<%  }  %>
+</body>
+</html>

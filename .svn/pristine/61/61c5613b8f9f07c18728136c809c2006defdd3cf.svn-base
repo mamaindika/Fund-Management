@@ -1,0 +1,157 @@
+<%-- 
+    Document   : role assign
+    Created on : Jun 17, 2016, 9:08:09 AM
+    Author     : boc
+--%>
+<%@page import="model.TblRoleassign"%>
+<%@page import="model.TblUser"%>
+<%@page import="service.UserService"%>
+<%@page import="model.TblUserroles"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.UserRolesService"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>.custom {width: 50px !important;}</style>
+
+        <script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+        </script>
+
+    </head>
+    <body>
+<form action="RoleAssignController" method="post" id="add" name="add">
+        <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">Role</label> 
+                            <div class="col-md-3" >
+               <select class="form-control input-sm"  name="role"  id="role" >
+                 
+                    <option>select</option>
+                    <%
+                    UserRolesService roleSer = new UserRolesService();
+                    List role = roleSer.listUserRoles();
+                  
+                  for (Iterator iterator = role.iterator(); iterator.hasNext();) {
+                     TblUserroles tbluserroles = (TblUserroles) iterator.next();
+                     request.setAttribute("role",tbluserroles);
+                     System.out.println("test66"+tbluserroles.getId());
+                    %>
+                    <option value=<%=tbluserroles.getId()%>><%= tbluserroles.getDescription()%></option> 
+                    <% System.out.println("test88"+tbluserroles.getId());%>
+                <%  }  %>
+                </select>
+
+                </div>
+        </div>
+<div class="row">
+    <div class="col-md-5">
+         <div class="form-group" hidden="true">
+        <input type="text" type="hidden" class="form-control" placeholder="Search" name="srch-term" id="system-search"> 
+        </div>
+</div>
+        
+            </div>
+            <br><br>         
+    <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">User</label> 
+                            <div class="col-md-3">
+              <select class="form-control input-sm" id="pfno" name="pfno">
+                    <option>select</option>
+                <%
+                    UserService userSer = new UserService();
+                    List users = userSer.ActivelistUsers();
+                for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                    TblUser tbluser = (TblUser) iterator.next();
+                    request.setAttribute("pfno",tbluser);
+                    System.out.println("test66"+tbluser.getPfNo());
+                %>
+                    <option value=<%=tbluser.getPfNo()%>><%= tbluser.getPfNo()%></option> 
+                <% System.out.println("test88"+tbluser.getPfNo());%>
+            <%  }  %>
+                </select> 
+                </div>
+        </div>
+<br><br> 
+<div class="form-group">
+     <div class="col-md-8">
+        <button id="add" name="add" action="name" type="submit" class="btn btn btn-primary btn-sm  move-right btn-primary">
+       Assign
+        </button>
+     </div>
+</div>
+</form>
+        <div class="row">
+             <div class="col-md-10">
+    <table class="table table-list-search">
+    <thead style="text-align:left">
+        <tr>
+           <th>PF No</th> 
+           <th>User Role</th>
+           <th></th>
+        </tr>
+    </thead>
+    <tbody style="text-align:left">
+        <%
+            UserRolesService as = new UserRolesService ();
+            List users1 = as.listassignRoles();
+            for (Iterator iterator = users1.iterator(); iterator.hasNext();) {
+                TblRoleassign us = (TblRoleassign) iterator.next();
+        %>
+        <tr>
+
+            <td><%= us.getTblUser().getPfNo()%></td>
+            <td><%= us.getTblUserroles().getDescription()%></td>
+             <form name="editForm" action="RoleAssignEditController" method="post">
+                        <div class="row">
+                            <div class="col-md-2">  
+                                <div class="form-group">
+                                <td> <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-sm" /> </td>
+                              </div>
+        
+                        <input type="hidden" value="<%=us.getTblUser().getPfNo()%>" name="searchValue" />             
+                        <input type="hidden" value="<%=us.getTblUserroles().getId()%>" name="searchValue1" />
+                        <input type="hidden" value="<%=us.getId() %>" name="searchValue2" />  
+                            </div>
+                        </div>
+                    </form>  
+                    
+                    
+                <%  }  %>
+          
+                
+                
+                </tr>
+
+    </tbody>
+</table>
+</div> 
+</div>
+
+    </body>
+</html>

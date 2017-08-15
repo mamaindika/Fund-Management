@@ -1,0 +1,63 @@
+<style>.custom {width: 50px !important;}</style>
+
+
+<!--<div class="panel panel-default">
+<div class="panel-heading" style="background:#ADD8E6">
+    <h3 class="panel-title" style="text-align:left">
+        <b>Change Password</b>
+</h3>
+</div>
+    <div class="panel-body" style="background:#99ccff">-->
+        
+<%@page import="service.userCredentialsService"%>
+<%@page import="model.TblUsercredentials" %>
+
+<br><br>
+<h4 style="text-align: left;"><b>Change Password</b></h4>
+
+<br>
+<form name="changePassword" onsubmit="return pass()" style="width:800px" class="form-horizontal" method="post" action="ChangePasswordController">
+
+<!-- Password input-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="CurrentPassword" style="text-align:left">Current Password</label>
+<div class="col-lg-4">
+<input id="password" name="password" type="password" placeholder="" class="form-control input-sm">
+
+</div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="newpassword" style="text-align:left">New Password</label>
+<div class="col-lg-4">
+<input id="newpassword" name="newpassword" type="password" placeholder="" class="form-control input-sm">
+
+</div>
+</div>
+
+<!-- Confirm Password input-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="confirmpassword" style="text-align:left">Confirm Password</label>
+<div class="col-lg-4">
+<input id="confirmpassword" name="confirmpassword" type="password" placeholder="" class="form-control input-sm">
+
+</div>
+</div>
+
+<!-- Button -->
+ <div class="btn">
+                       <div class="col-md-5">
+                       <div style="padding-left:120px">
+                           <input  class="btn btn-primary btn-xs custom" onclick="location.href='changepassword.jsp'"  value="Clear"/>
+                           &nbsp; 
+                            <input id="Save" name="action" type="submit" class="btn btn-primary btn-xs custom" value="Save"/>
+
+                                   </div>
+                       </div>
+</div> 
+
+
+       </form>						
+    </div>
+</div>

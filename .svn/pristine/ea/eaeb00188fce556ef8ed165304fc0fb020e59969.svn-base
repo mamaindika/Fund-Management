@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123</property>
+    <mapping resource="model/TblUser.hbm.xml"/>
+    <mapping resource="model/TblMasterjournals.hbm.xml"/>
+    <mapping resource="model/TblRoleassign.hbm.xml"/>
+    <mapping resource="model/TblFundassign.hbm.xml"/>
+    <mapping resource="model/TblAccountJournalmapping.hbm.xml"/>
+    <mapping resource="model/TblDesignations.hbm.xml"/>
+    <mapping resource="model/TblUserroles.hbm.xml"/>
+    <mapping resource="model/TblMasteraccounts.hbm.xml"/>
+    <mapping resource="model/TblFundtypes.hbm.xml"/>
+    <mapping resource="model/TblInvestmenttypes.hbm.xml"/>
+    <mapping resource="model/TblUsercredentials.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

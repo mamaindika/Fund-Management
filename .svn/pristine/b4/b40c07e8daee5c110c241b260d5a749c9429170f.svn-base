@@ -1,0 +1,146 @@
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.DesignationService"%>
+<%@page import="model.TblDesignations" %>
+<html>
+    <style>
+            .custom {
+    width: 50px !important;
+}
+    </style>
+    <br>  <br>  <br>  <br>
+    <div>
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+                 <a href="Designation_AddPage.jsp" class="btn btn-primary ">
+                    <span class="glyphicon glyphicon-plus-sign"></span> 
+                    Add Designation
+                </a>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+        <div class="row">
+       <div class="modal fade" id="addDesignation" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                  Add New Designation
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+<form  method="post" name="addDesignation" action="designationAddController"  class="form-horizontal" style="width:800px">
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">Description</label> 
+                            <div class="col-md-3">
+                                <input id="description" name="description" value="" type="text"  class="form-control input-sm" required="" style="padding-left:10px">
+                            </div>
+
+                        </div>
+                        
+                          <div class="form-group">
+                        <div class="col-md-5">
+                        <div style="padding-left:190px;">
+                            <input type="submit" class="btn btn-sm btn-primary" onclick="location.href='designationpage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+                             <input type="submit" class="btn btn-sm btn-primary" value="Save"/>
+                                    </div>
+                        </div>
+                        </div> 
+
+                    </form>       
+           
+        </div>
+    </div>
+</div>
+        </div>
+        </div> 
+
+       <!-- <form name="searchForm" action="searchController">
+            <div class="row">
+                <div class="col-md-2">  
+                    <div class="form-group">
+                        <label class="control-label" for="id">
+                            Designation ID
+                        </label>
+                        <input type="text" class="form-control input-sm" id="id" name="searchValue" value="" >
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <br /> 
+                  <input type="submit" value="Filter" name="searchButton" class="btn btn-primary btn-sm" />
+
+                </div>  
+            </div>
+        </form> -->
+
+        
+     <table class="table table-bordered">
+            <thead style="text-align:left">
+                <tr>
+                    
+                    <th style="text-align:center">Description</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left">
+                <%
+                    DesignationService as = new DesignationService();
+                    List users = as.listDesignations();
+                    for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                        TblDesignations us = (TblDesignations) iterator.next();
+                %>
+                <tr>
+                   
+                    <td><%= us.getDescription()%></td>
+                   
+                    
+                     <form name="editForm" action="designationEditController" method="post">
+                        <div class="row">
+                            <div class="col-md-2">  
+                                <div class="form-group">
+                                <td> <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-xs custom" /> </td>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="hidden" value="<%=us.getId() %>" name="searchValue" />
+                                <td> <a href="Designation_DeletePage.jsp?id=<%=us.getId() %>" class="btn btn-primary btn-xs custom">Delete</a> </td>
+                                </div>
+                        </div>
+                    </form>  
+                    
+                    
+                <%  }  %>
+          
+                
+                
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</html>

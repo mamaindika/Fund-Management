@@ -1,0 +1,41 @@
+<%@page import="java.util.Date"%>
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+
+</button>
+<a class="navbar-brand"><img alt="" src="images/boc.jpg" height="55px" width="80px" style=""></a>
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+<ul class="nav navbar-nav" style="color:white">
+
+<h3>Fund Management Application</h3><h5>Supperannuation Department</h5>
+</ul>
+    <div style = 'display: none'>
+<ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav" style="color:white">
+    <li><h6>Miss. Hashini</h6>
+        <h6><%=new Date().toString()%></h6>
+    </li>
+</ul>
+<li>
+<div id="button"  align="right" >
+<button class="btn btn-xs btn-default">
+
+<a href="dashboardpage.jsp"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+</button>
+<button type="button" class="btn btn-xs btn-default">
+<div id="LogOutDiv"><a href="LogOutController" id="aLogOut">Log out</a><span class="glyphicon glyphicon-log-out"></span></div>
+</button>
+</div>
+</ul>
+</div>
+
+
+
+</li>
+</ul>
+</div>
+</div>
+</nav>

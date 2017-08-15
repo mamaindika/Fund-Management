@@ -1,0 +1,124 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package service;
+
+import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import model.TblFunduserassign;
+import model.TblUser;
+import model.TblUsercredentials;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+
+/**
+ *
+ * @author boc
+ */
+public class loginService {
+
+
+    public boolean authenticateUser(String userId, String password,int fundId) {
+        
+        TblUsercredentials user = getUserByUserId(userId);
+        TblFunduserassign fund = getfundTypeByuser(user.getTblUser().getPfNo(),fundId);
+        //TblFunduserassign fundAss = getfundTypeByuserName(user.getTblUser().getPfNo()); 
+        
+        if((user!=null && user.getUserId().equals(userId) && user.getPassword().equals(password))&&
+                ( fund!=null && ((fund.getTblUser().getPfNo())==(user.getTblUser().getPfNo()))&&fund.getTblFundtypes().getId().equals(fundId) )){    
+      
+            //if( fundAss!=null && (fundAss.getTblUser().getPfNo()==(user.getTblUser().getPfNo())));
+            //System.out.println("fund asspf"+fundAss.getTblUser().getPfNo()); 
+                   System.out.println("user pf"+user.getTblUser().getPfNo()); 
+                //   System.out.println("fund id"+fund.getTblFundtypes().getId()); 
+       return true;
+        }else{ 
+            return false;
+        }
+    }
+
+    public TblUsercredentials getUserByUserId(String userId) {
+         Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        TblUsercredentials user = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblUsercredentials where userId='"+userId+"'");
+            user = (TblUsercredentials)query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+    
+     public TblFunduserassign getfundTypeByuserName(int pfNo) {
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        TblFunduserassign User = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblFunduserassign where pfNo='"+pfNo+"'");
+            User = (TblFunduserassign)query.uniqueResult();
+            tx.commit();
+             System.out.println("pfNo"+pfNo); 
+
+          
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return User;
+    }
+    public TblFunduserassign getfundTypeByuser(int pfNo, int fundId) {
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        TblFunduserassign User = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from TblFunduserassign where fundId='"+fundId+"' AND pfNo='"+pfNo+"'");
+        //("Select f.pfNo , f.fundId from TblFunduserassign f");
+        //("from TblFunduserassign where fundId AND pfNo='"+fundId+"'");
+            
+            User = (TblFunduserassign)query.uniqueResult();
+            tx.commit();
+             System.out.println("fundId"+fundId); 
+
+          
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return User;
+    }
+    
+    
+    
+    
+    
+}

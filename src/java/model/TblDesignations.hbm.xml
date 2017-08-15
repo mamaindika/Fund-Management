@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated Nov 18, 2016 10:56:05 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+
+<class
+    name="model.TblDesignations"
+    table="tbl_designations"
+    catalog="fund_manager"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="id"
+        type="java.lang.Integer"
+    >
+    
+<column name="id" />
+	    <generator class="identity" />
+    </id>
+
+
+
+
+    <property
+        name="description"
+	    type="string"
+    >
+<column name="description" length="150" />
+  </property>
+
+
+	<set name="tblUsers"
+table="tbl_user"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="designationId" />
+		</key>
+<one-to-many class="model.TblUser"
+/>
+	</set>
+
+</class>
+
+</hibernate-mapping>

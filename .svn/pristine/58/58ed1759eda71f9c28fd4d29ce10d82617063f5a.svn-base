@@ -1,0 +1,80 @@
+<%-- 
+    Document   : masterAccounts
+    Created on : May 11, 2016, 10:05:44 AM
+    Author     : Boc
+--%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.masterAccountsService"%>
+<%@page import="model.TblMasteraccounts" %>
+    <style>.custom {width: 50px !important;}</style>
+    <br>  <br>  <br>
+    <div>
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+                <a href="MasterAccounts_AddPage.jsp" class="btn btn-primary ">
+                    <span class="glyphicon glyphicon-plus-sign"></span> 
+                    Add Master Accounts Details
+                </a>
+            </div>
+        </div> 
+        </div> 
+
+
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+
+
+     <table class="table table-bordered">
+       
+            <thead  style="text-align:left">
+                
+                <tr>
+                    
+                    <th style="text-align:center">Account No</th>
+                    <th style="text-align:center">Name Of Account</th>
+                    <th colspan="4" style="text-align:center">Current Ledger/Book No</th>
+                    <th style="text-align:center">Type Of Account</th>
+                    <th style="text-align:center">Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left">
+                <%
+                    masterAccountsService as = new masterAccountsService();
+                    List users = as.listMasterAccounts();
+                    for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                        TblMasteraccounts us = (TblMasteraccounts) iterator.next();
+                %>
+                <tr>
+                    <td style="text-align:right"><%= us.getAccountNo()%></td>
+                    <td><%= us.getAccountName()%></td>
+                    <td colspan="4" style="text-align:right"><%= us.getCurrentLedger()%></td>
+                    <td><%= us.getTypeOfAccount()%></td>
+                    <td><%= us.getStatus()%></td>
+           
+                    <td style="text-align: center">
+                    <form name="editForm" action="editMasterAccountsController" method="post">
+                    <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-xs custom" />
+                    <input type="hidden" value="<%=us.getAccountNo() %>" name="searchValue" />
+                   
+                    <a href="deleteMasterAccountsPage.jsp?accountNo=<%=us.getAccountNo()%>" class="btn btn-primary btn-xs custom">Delete</a>
+                       
+                    </form>  
+                    </td>
+                    
+                <%  }  %>
+          
+                
+                
+                </tr>
+            </tbody>
+        </table>

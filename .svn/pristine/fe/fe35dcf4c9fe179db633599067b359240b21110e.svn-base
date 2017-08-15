@@ -1,0 +1,104 @@
+<%-- 
+    Document   : masterAccounts
+    Created on : May 11, 2016, 10:05:44 AM
+    Author     : Boc
+--%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="util.HibernateUtil"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="service.masterAccountsService"%>
+<%@page import="model.TblMasteraccounts" %>
+<html>
+    <br>  <br>  <br>  <br>
+    <div> 
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+                <a href="MasterJournals_AddPage.jsp" class="btn btn-primary ">
+                    <span class="glyphicon glyphicon-plus-sign"></span> 
+                    Add Master Journal Details
+                </a>
+            </div>
+        </div> 
+        </div> 
+        
+
+        <div class="row">
+            <div class="col-md-2">
+                <br /> 
+
+            </div>
+        </div> 
+
+       <!-- <form name="searchForm" action="searchController">
+            <div class="row">
+                <div class="col-md-2">  
+                    <div class="form-group">
+                        <label class="control-label" for="id">
+                            Designation ID
+                        </label>
+                        <input type="text" class="form-control input-sm" id="id" name="searchValue" value="" >
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <br /> 
+                  <input type="submit" value="Filter" name="searchButton" class="btn btn-primary btn-sm" />
+
+                </div>  
+            </div>
+        </form> -->
+
+        
+     <table class="table table-bordered">
+       
+            <thead  style="text-align:left">
+                
+                <tr>
+                    
+                    <th style="text-align:center">Account No</th>
+                    <th style="text-align:center">Name Of Account</th>
+                    <th colspan="4" style="text-align:center">Current Ledger/Book No</th>
+                    <th style="text-align:center">Type Of Account</th>
+                    <th style="text-align:center">Status</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:left">
+                <%
+                    masterAccountsService as = new masterAccountsService();
+                    List users = as.listMasterAccounts();
+                    for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+                        TblMasteraccounts us = (TblMasteraccounts) iterator.next();
+                %>
+                <tr>
+                    <td style="text-align:right"><%= us.getAccountNo()%></td>
+                    <td><%= us.getAccountName()%></td>
+                    <td colspan="4" style="text-align:right"><%= us.getCurrentLedger()%></td>
+                    <td><%= us.getTypeOfAccount()%></td>
+                    <td><%= us.getStatus()%></td>
+           
+                     <form name="editForm" action="editMasterAccountsController" method="post">
+                        <div class="row">
+                            <div class="col-md-2">  
+                                <div class="form-group">
+                                <td> <input type="submit" value="Edit" name="editButton" class="btn btn-primary btn-sm" /> </td>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="hidden" value="<%=us.getAccountNo() %>" name="searchValue" />
+                                <td> <a href="deleteMasterAccountsPage.jsp?accountNo=<%=us.getAccountNo() %>" class="btn btn-primary btn-sm">Delete</a> </td>
+                                </div>
+                        </div>
+                    </form>  
+                    
+                    
+                <%  }  %>
+          
+                
+                
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</html>

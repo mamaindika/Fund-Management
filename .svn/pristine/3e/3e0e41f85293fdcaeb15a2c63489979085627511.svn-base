@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 21, 2016 10:39:00 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.TblTransactiontype" table="tbl_transactiontype" catalog="test" optimistic-lock="version">
+        <id name="transactionId" type="java.lang.Integer">
+            <column name="TransactionId" />
+            <generator class="identity" />
+        </id>
+        <property name="transactionDescription" type="string">
+            <column name="TransactionDescription" length="100" />
+        </property>
+        <set name="tblTransactionsdetails" table="tbl_transactionsdetail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TransactionId" />
+            </key>
+            <one-to-many class="model.TblTransactionsdetail" />
+        </set>
+    </class>
+</hibernate-mapping>

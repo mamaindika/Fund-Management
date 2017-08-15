@@ -1,0 +1,73 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.TblUserroles" %>
+<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Modal title
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+<form  method="post" name="addDesignation" action="userRolesAddController"  class="form-horizontal" style="width:800px">
+    <br> <br> <br> <br>
+                        <!-- Form Name -->
+                        <h4 style="text-align: left;"><b>Add New User Role</b></h4>
+<br> <br>
+                        <!-- Text input-->
+     
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" style="text-align:left">Description</label> 
+                            <div class="col-md-3">
+                                <input id="description" name="description" value="" type="text"  class="form-control input-sm" required="" style="padding-left:10px">
+                            </div>
+
+                        </div>
+                        
+                          <div class="form-group">
+                        <div class="col-md-5">
+                        <div style="padding-left:190px;">
+                            <input type="submit" class="btn btn-sm btn-primary" onclick="location.href='designationpage.jsp'"  value="Back"/>
+                            &nbsp; &nbsp; 
+                             <input type="submit" class="btn btn-sm btn-primary" value="Save"/>
+                                    </div>
+                        </div>
+                        </div> 
+
+                    </form>
+      
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+                    <h2>
+                        <%
+                            String rMessage = request.getParameter("message");
+                            if (rMessage == null) {
+                                rMessage = "";
+                            }
+                            out.println(rMessage);
+
+                        %>
+                    </h2>
+
+                   

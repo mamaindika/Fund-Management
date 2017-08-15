@@ -1,0 +1,217 @@
+<%-- 
+    Document   : create user
+    Created on : Mar 21, 2016, 9:19:28 AM
+    Author     : boc
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>        </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+
+  <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="dist/css/bootstrapValidator.css"/>
+
+    <script type="text/javascript" src="dist/js/bootstrapValidator.js"></script>
+
+    
+</head>
+<body>
+    <div class="col-md-10" style="background-color:#FF9">
+<section>
+               <form id="togglingForm" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<h4 style="text-align: left;"><b>Add New User<b></h4>
+
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-2 control-label" for="User Name" style="text-align:left">User Name</label> 
+<div class="col-md-3">
+<input id="User Name" name="UserName" type="text" placeholder="UserName" class="form-control input-sm" required="" style="padding-left:10px">
+
+</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-2 control-label" for="PF No" style="text-align:left">PF No</label> 
+<div class="col-md-3">
+<input id="PFNo" name="pfNo" type="text" placeholder="pfNo" class="form-control input-sm" required="">
+
+</div>
+</div>
+
+
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-2 control-label" for="sel1" style="text-align:left">Designation</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+
+  </select>
+</div>
+</div>
+
+<!-- select-->
+<div class="form-group">
+<label class="col-md-2 control-label" for="sel1" style="text-align:left">Status</label>
+<div class="col-md-3">
+<select class="form-control input-sm" id="sel1">
+
+    <option>Active</option>
+    <option>Deceased</option>
+    <option>In-Active </option>
+
+  </select>
+</div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+<label class="col-md-2 control-label" for="Gender" style="text-align:left">Gender</label>
+<div class="col-md-3"> 
+<label class="radio-inline" for="Gender-0">
+<input type="radio" name="Gender" id="Gender-0" value="Male" checked="checked">
+Male
+</label> 
+<label class="radio-inline" for="Gender-1">
+<input type="radio" name="Gender" id="Gender-1" value="Female">
+Female
+</label>
+</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-2 control-label" for="Office No" style="text-align:left">Office No</label> 
+<div class="col-md-3">
+<input id="Office No" name="officeNo" type="text" placeholder="Office No" class="form-control input-sm" required="">
+
+</div>
+</div>
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-2 control-label" for="Mobile No" style="text-align:left">Mobile No</label> 
+<div class="col-md-3">
+<input id="Mobile No" name="mobileNo" type="text" placeholder="Mobile No" class="form-control input-sm" required="">
+
+</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+<label class="col-md-2 control-label" for="inputEmail" style="text-align:left">Email</label> 
+<div class="col-md-3">
+<input id="inputEmail" name="Email" type="email" placeholder="Email" class="form-control input-sm" data-error=" email address is invalid" required="">
+  <div class="help-block with-errors"></div>
+</div>
+</div>
+
+
+
+  
+<!-- Button -->
+<div class="form-group">
+<div class="col-md-3">
+<div style="padding-left:200px;">
+<button type="submit" class="btn btn-primary">Validate</button>
+</div>
+</div>
+</div>
+
+</fieldset>
+</form>
+</section>
+    </div>
+
+<script>
+$(document).ready(function() {
+    $('#togglingForm')
+        .bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            submitHandler: function(validator, form, submitButton) {
+                // Do nothing
+            },
+            fields: {
+                UserName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The first name is required'
+                        }
+                    }
+                },
+                
+                pfNo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The PF No is required'
+                        }
+                    }
+                },
+                
+                mobileNo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The mobile phone number is required'
+                        },
+                        digits: {
+                            message: 'The mobile phone number is not valid'
+                        }
+                    }
+                },
+
+                officeNo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The office phone number is required'
+                        },
+                        digits: {
+                            message: 'The office phone number is not valid'
+                        }
+                    }
+                }
+            }
+        })
+        .find('button[data-toggle]')
+            .on('click', function() {
+                var $target = $($(this).attr('data-toggle'));
+                // Show or hide the additional fields
+                // They will or will not be validated based on their visibilities
+                $target.toggle();
+                if (!$target.is(':visible')) {
+                    // Enable the submit buttons in case additional fields are not valid
+                    $('#togglingForm').data('bootstrapValidator').disableSubmitButtons(false);
+                }
+            });
+});
+</script>
+</body>
+
+</html>
+

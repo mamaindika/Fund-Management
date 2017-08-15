@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 3, 2016 1:27:34 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.TblInvestments" table="tbl_investments" catalog="test" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tblFundtypes" class="model.TblFundtypes" fetch="select">
+            <column name="fundId" />
+        </many-to-one>
+        <many-to-one name="tblInvestmenttypes" class="model.TblInvestmenttypes" fetch="select">
+            <column name="InvestmentTypeId" />
+        </many-to-one>
+        <many-to-one name="tblMasterjournals" class="model.TblMasterjournals" fetch="select">
+            <column name="journalNo" />
+        </many-to-one>
+        <property name="referenceNo" type="java.lang.Integer">
+            <column name="referenceNo" />
+        </property>
+        <property name="receiptNo" type="java.lang.Integer">
+            <column name="ReceiptNo" />
+        </property>
+        <property name="investDate" type="string">
+            <column name="InvestDate" length="100" />
+        </property>
+        <property name="matureDate" type="string">
+            <column name="MatureDate" length="100" />
+        </property>
+        <property name="noOfDays" type="java.lang.Integer">
+            <column name="NoOfDays" />
+        </property>
+        <property name="amount" type="big_decimal">
+            <column name="Amount" precision="13" />
+        </property>
+        <property name="taxRate" type="java.lang.Integer">
+            <column name="TaxRate" />
+        </property>
+        <property name="taxValue" type="string">
+            <column name="TaxValue" length="100" />
+        </property>
+        <property name="interestRate" type="java.lang.Integer">
+            <column name="InterestRate" />
+        </property>
+        <property name="interestValue" type="big_decimal">
+            <column name="InterestValue" precision="4" />
+        </property>
+        <property name="interestAt" type="java.lang.Integer">
+            <column name="InterestAt" />
+        </property>
+        <property name="interest" type="big_decimal">
+            <column name="interest" precision="10" />
+        </property>
+    </class>
+</hibernate-mapping>

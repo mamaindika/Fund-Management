@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="test"/>
+  <table-filter match-name="tbl_user"/>
+  <table-filter match-name="tbl_transactiontype"/>
+  <table-filter match-name="tbl_fundtypes"/>
+  <table-filter match-name="tbl_masteraccounts"/>
+  <table-filter match-name="tbl_roleassign"/>
+  <table-filter match-name="tbl_investmenttypes"/>
+  <table-filter match-name="tbl_userroles"/>
+  <table-filter match-name="tbl_account_journalmapping"/>
+  <table-filter match-name="tbl_designations"/>
+  <table-filter match-name="tbl_funduserassign"/>
+  <table-filter match-name="tbl_transactionsdetails"/>
+  <table-filter match-name="tbl_usercredentials"/>
+  <table-filter match-name="tbl_masterjournals"/>
+  <table-filter match-name="tbl_investments"/>
+</hibernate-reverse-engineering>
